@@ -1,0 +1,10 @@
+Ao instalar o xampp, para facilitar o desenvolvimento criei um alias e um diretório no arquivo httpd.conf indicando o caminho da pasta do projeto. Abaixo o código:
+
+Alias /biro "D:/Toni/programas/eclipse-php/workspace/licencas_biro_rep/"
+ 
+<Directory "D:/Toni/programas/eclipse-php/workspace/licencas_biro_rep/">
+   Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>

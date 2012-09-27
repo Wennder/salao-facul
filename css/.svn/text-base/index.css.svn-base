@@ -1,0 +1,141 @@
+body {
+	margin: 0;
+	padding: 0;
+	border: none;
+	font: 11px/1.5 Verdana, Arial, Helvetica, sans-serif;
+	background: white;
+	color: #333;
+	text-align: center;
+}
+
+#tudo {
+	width: 800px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+#topo {
+	height: 50px;
+	border-bottom: 1px solid #E5E5E5;
+	background: whiteSmoke;
+}
+
+#rodape {
+	clear: both;
+	text-align: center;
+	border-top: 1px solid #E5E5E5;
+}
+
+#nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#nav li {
+	border-bottom: 1px solid #E5E5E5;
+	margin: 0;
+}
+
+#nav li a {
+	display: block;
+	padding: 5px 5px 5px 0.5em;
+	font-weight: bold;
+	border-left: 10px solid whiteSmoke;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+}
+
+#nav li a:hover {
+	border-left: 10px solid whiteSmoke;
+	background-color: whiteSmoke;
+	color: black;
+}
+
+h1,h2,h3 {
+	margin: 0.8em 0;
+	font-size: 1.4em;
+}
+
+h2 {
+	font-size: 1.2em;
+}
+
+h3 {
+	font-size: 1.0em;
+}
+
+.dest {
+	color: #039;
+}
+
+#principal {
+	float: left;
+	width: 648px;
+	margin-left: 10px;
+	text-align: justify;
+	border-width: 0 1px;
+	padding: 0 10px;
+}
+
+#nav {
+	width: 120px;
+	float: left;
+}
+
+#licencas table {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+	color: #333;
+	background: white;
+}
+
+#licencas table a {
+	color: #3A4856;
+	text-decoration: none;
+	border-bottom: 1px solid #C6C8CB;
+}
+
+#licencas table a:visited {
+	color: #777;
+}
+
+#licencas table a:hover {
+	color: #000;
+}
+
+#licencas table caption {
+	text-align: left;
+	text-transform: uppercase;
+	padding-bottom: 10px;
+	font: 200% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS",
+		sans-serif;
+}
+
+#licencas table th {
+	background: white;
+	padding: 15px 10px;
+	color: black;
+	text-align: left;
+	font-weight: normal;
+}
+
+#licencas table tbody td,table tbody th {
+	padding: 10px;
+	text-align: left;
+}
+
+#licencas table tbody tr {
+	background: white;
+}
+
+#licencas table . tbody tr.odd {
+	background: #F0F2F4;
+}
+
+#licencas table tbody  tr:hover {
+	background: whiteSmoke;
+	color: #111;
+}
