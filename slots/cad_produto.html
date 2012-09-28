@@ -1,12 +1,24 @@
-<div id="divCadProduto" style="margin: auto; width: 600px;">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<form id="form_cad_produto" style="margin: auto; width: 300px;" 
+	action="cadastrar_produto.php"
+	onsubmit="return false" 
+	onkeypress="if(checkEnter(event)){return submitForm('form_cad_produto')};">
 			<h2>Informe os dados do produto</h2>
 			<table>
 				<tr>
 				<td>
-					<table style="width: 100%">
+					<table>
 						<tr>
 						<td style="float: right">Nome:</td>
-						<td><input type="text" id="txNomeCliente" style="width: 100%" onkeypress="return onEnter(enviarDadosValidacao, event);"/></td>
+						<td><input type="text" name="nome" style="width: 100%" /></td>
+						</tr>
+						<tr>
+						<td style="float: right">eamil:</td>
+						<td><input type="text" name="email" style="width: 100%" /></td>
 						</tr>
 					</table>
 				</td>
@@ -14,4 +26,22 @@
 				</td>
 				</tr>
 			</table>
-		</div>
+</form>
+<script type="text/javascript">
+       $('#form_cad_produto').validate({
+            rules:{
+                nome:{
+                    required: true,
+                    minlength: 3
+                }
+            },
+            messages:{
+                nome:{
+                    required: "O campo nome é obrigatorio.",
+                    minlength: "O campo nome deve conter no mínimo 3 caracteres."
+                }
+            }
+        });
+</script>
+</body>
+</html>

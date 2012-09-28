@@ -20,6 +20,14 @@ body {
 	background: whiteSmoke;
 }
 
+#nav {
+	float: left;
+}
+
+#conteudo {
+	float: center;
+}
+
 #rodape {
 	clear: both;
 	text-align: center;

@@ -8,7 +8,7 @@
 class ConnectionProperty{
 	private static $host = 'localhost';
 	private static $user = 'root';
-	private static $password = 'mysql';
+	private static $password = '';
 	private static $database = 'salao';
 
 	public static function getHost(){
