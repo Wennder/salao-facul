@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-09-26 23:35
+ * @date: 2012-09-28 14:48
  */
 interface ClienteDAO{
 
@@ -71,6 +71,12 @@ interface ClienteDAO{
 
 	public function queryByCabelo($value);
 
+	public function queryByUsername($value);
+
+	public function queryBySenha($value);
+
+	public function queryByAdmin($value);
+
 
 	public function deleteByNome($value);
 
@@ -91,6 +97,12 @@ interface ClienteDAO{
 	public function deleteByTelefoneTrabalho($value);
 
 	public function deleteByCabelo($value);
+
+	public function deleteByUsername($value);
+
+	public function deleteBySenha($value);
+
+	public function deleteByAdmin($value);
 
 
 }

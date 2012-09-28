@@ -3,7 +3,7 @@
 	 * Object represents table 'cliente'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2012-09-26 23:35	 
+     	 * @date: 2012-09-28 14:48	 
 	 */
 	class Cliente{
 		
@@ -18,6 +18,9 @@
 		var $enderecoTrabalho;
 		var $telefoneTrabalho;
 		var $cabelo;
+		var $username;
+		var $senha;
+		var $admin;
 		
 	}
 ?>

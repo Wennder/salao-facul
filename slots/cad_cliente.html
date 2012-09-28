@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<form id="form_cad_cliente" style="margin: auto; width: 300px;" 
+	action="cadastrar_cliente.php"
+	onsubmit="return false" 
+	onkeypress="if(checkEnter(event)){return submitForm()};">
+			<h2>Informe os dados do cliente</h2>
+			<table>
+				<tr>
+				<td>
+					<table>
+						<tr>
+						<td style="float: right">Nome:</td>
+						<td><input id="nome_cliente" type="text" name="nome" style="width: 100%" /></td>
+						</tr>
+						<tr>
+						<td style="float: right">Username:</td>
+						<td><input type="text" name="username" style="width: 100%" /></td>
+						</tr>
+						<tr>
+						<td style="float: right">Senha:</td>
+						<td><input type="text" name="senha" style="width: 100%" /></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+				</td>
+				</tr>
+			</table>
+</form>
+<script type="text/javascript">
+       $('#form_cad_cliente').validate({
+            rules:{
+                nome:{
+                    required: true
+                },
+				username:{
+                    required: true
+                },
+				senha:{
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages:{
+                nome:{
+                    required: "Você deve informar o seu nome."
+                },
+				username:{
+                    required: "Você deve informar o seu nome de usuário."
+                },
+				senha:{
+                    required: "Você deve informar sua senha.",
+                    minlength: "Sua senha deve conter no mínimo 5 caracteres."
+                }
+            }
+        });
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 
-jQuery(document).ready(function(){
+$(document).ready(function(){
 	$("#loading").ajaxStart(function(){
 		$(this).show();
 	});
@@ -9,14 +9,17 @@ jQuery(document).ready(function(){
 	
 });
 
-function submitForm(id) {
-	var jid='#'+id;
-	var data = jQuery(jid).find('input').serialize(); // Dados do formulário    
+function submitForm() {
+	var jid='#'+$(event.target).closest("form").attr('id');
+	if (!$(jid).valid())
+		return false;
+	
+	var data = $(jid).find('input').serialize(); // Dados do formulário    
 
         // Envia o formulário via Ajax
-        jQuery.ajax({
+        $.ajax({
                 type: 'POST',
-                url: jQuery(jid).attr('action'),
+                url: $(jid).attr('action'),
                 data: data,
                 success: function(json)
                 {
@@ -52,13 +55,13 @@ function checkEnter(e) {
 }
 
 function setConteudo(pagina) {
-	jQuery('#conteudo').empty();
-	jQuery.ajax({
+	$('#conteudo').empty();
+	$.ajax({
 		type: "GET",
 		url: pagina,
 	
 		success: function(data){
-			jQuery('#conteudo').html(data); 	
+			$('#conteudo').html(data); 	
 		}
 	});
 }

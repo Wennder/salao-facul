@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS funcionario (
 CREATE TABLE IF NOT EXISTS cliente (
   id int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(100) NOT NULL,
-  endereco varchar(50) NOT NULL,
+  endereco varchar(50),
   cpf varchar(30) NOT NULL,
   rg varchar(30) NOT NULL,
   nasc datetime,
@@ -33,6 +33,9 @@ CREATE TABLE IF NOT EXISTS cliente (
   endereco_trabalho varchar(50),
   telefone_trabalho varchar(30),
   cabelo varchar(30),
+  username varchar(30) NOT NULL UNIQUE,
+  senha varchar(30) NOT NULL,
+  admin boolean,
   PRIMARY KEY (id)
 );
 
@@ -92,6 +95,5 @@ CREATE TABLE IF NOT EXISTS utensilio (
 );
 
 
-INSERT INTO usuario (id, nome, username, senha, tipo) VALUES
-(1, 'admin', 'admin', 'admin', 'admin');
+INSERT INTO cliente (nome, cpf, rg, username, senha, admin) VALUES ('Administrador', '54554', '545454', 'admin', 'admin', true);
 

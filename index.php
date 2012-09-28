@@ -12,6 +12,7 @@
 <body>	
 
 <div id="topo">
+<!-- <div id="loading" /> -->
 <h1>Salão da Leda</h1>
 </div>
 
@@ -19,7 +20,8 @@
 
 <div id="nav">
 <ul>
-	<li><a id="linkLicenca" href="javascript:setConteudo('slots/cad_funcionario.html');">Cadastro de funcionário</a></li>
+	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Cadastro de clientes</a></li>
+	<li><a id="linkLicenca" href="javascript:setConteudo('slots/cad_funcionario.html');">Cadastro de funcionÃ¡rio</a></li>
 	<li><a id="linkConsulta" href="javascript:setConteudo('slots/cad_produto.html');">Cadastro de produto</a></li>
 	<li><a id="linkSair" href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
 </ul>
