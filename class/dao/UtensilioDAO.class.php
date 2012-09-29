@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-09-28 14:48
+ * @date: 2012-09-29 18:01
  */
 interface UtensilioDAO{
 

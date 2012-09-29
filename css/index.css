@@ -75,14 +75,20 @@ body {
 #nav {
 	width: 120px;
 	float: left;
+	border-right: solid;
+	border-right-width: 1px;
+	border-right-color: whiteSmoke;
 }
 
 .titulo {
-	margin: 2px;
-	border: solid;
+/* 	margin: 2px; */
+	border-bottom: solid;
 	padding: 3px;
 	border-width: 1px;
-	border-color: gray;
-	background: lightBlue;
+	border-color: darkGray;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 12px;
+/* 	background: lightBlue; */
 }
 }

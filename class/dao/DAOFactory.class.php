@@ -50,6 +50,13 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return ServicoDAO
+	 */
+	public static function getServicoDAO(){
+		return new ServicoMySqlExtDAO();
+	}
+
+	/**
 	 * @return UsuarioDAO
 	 */
 	public static function getUsuarioDAO(){

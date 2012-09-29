@@ -12,7 +12,7 @@
 <body>	
 
 <div id="topo">
-<div id="loading">Carregando...</div>
+<!-- <div id="loading">Carregando...</div> -->
 <div>Salão da Leda</div>
 </div>
 
@@ -36,8 +36,12 @@
 
 </div>
 
-<script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>  
-<script src="js/jquery.validate.min.js" type="text/javascript"></script>  
+<script src="js/jquery-1.7.2.js" type="text/javascript"></script>  
+<script src="js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="js/noty/jquery.noty.js" type="text/javascript"></script>
+<script src="js/noty/themes/default.js" type="text/javascript"></script>  
+<!-- <script src="js/noty/layouts/top.js" type="text/javascript" ></script> -->
+<script src="js/noty/layouts/center.js" type="text/javascript"></script>
 <script src="js/main.js" type="text/javascript"></script>
 
 		

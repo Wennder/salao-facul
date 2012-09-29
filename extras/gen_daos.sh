@@ -16,4 +16,5 @@ mysql -u root salao < $SCRIPT
 cd $GEN_PATH
 php generate.php
 cp $GEN_PATH/generated/include_dao.php $PROJECT_PATH
+rm -rf $PROJECT_PATH/class
 cp -Rap $GEN_PATH/generated/class $PROJECT_PATH/class

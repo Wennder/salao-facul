@@ -33,6 +33,10 @@
 	require_once('class/dto/Produto.class.php');
 	require_once('class/mysql/ProdutoMySqlDAO.class.php');
 	require_once('class/mysql/ext/ProdutoMySqlExtDAO.class.php');
+	require_once('class/dao/ServicoDAO.class.php');
+	require_once('class/dto/Servico.class.php');
+	require_once('class/mysql/ServicoMySqlDAO.class.php');
+	require_once('class/mysql/ext/ServicoMySqlExtDAO.class.php');
 	require_once('class/dao/UsuarioDAO.class.php');
 	require_once('class/dto/Usuario.class.php');
 	require_once('class/mysql/UsuarioMySqlDAO.class.php');

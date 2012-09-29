@@ -1,12 +1,12 @@
 
 $(document).ready(function(){
-	$("#loading").hide();
-	$("#loading").ajaxStart(function(){
-		$(this).show();
-	});
-	$("#loading").ajaxStop(function(){
-		$(this).hide();
-	}); 
+//	$("#loading").hide();
+//	$("#loading").ajaxStart(function(){
+//		$(this).show();
+//	});
+//	$("#loading").ajaxStop(function(){
+//		$(this).hide();
+//	}); 
 	
 });
 
@@ -16,9 +16,9 @@ function submitForm() {
 		return false;
 	
 	var data = $(jid).find('input').serialize(); // Dados do formulário   
-	var pre = $(jid).find('.loading');
-	if (pre)
-		$(jid).find('.loading').html('<img src="images/ajax-loader.gif" />');
+	var load = $(jid).find('.loading');
+	if (load)
+		load.html('<img src="images/ajax-loader.gif" />');
         // Envia o formulário via Ajax
         $.ajax({
                 type: 'POST',
@@ -26,18 +26,20 @@ function submitForm() {
                 data: data,
                 success: function(json)
                 {
+                   load.empty();
                    var status = eval('(' + json + ')');
 				   if (status.tipo == 'ok') {
-					   alert('ok. ' + status.info);
+					   noty({layout: 'center', type: 'success', text: status.info});
 				   }
 				   else {
-					   alert('erro. ' + status.info);
+					   noty({layout: 'center', type: 'error', text: status.info});
 				   }
 				   
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown)
                 {
-                	alert(errorThrown);
+                	load.empty();
+                	noty({layout: 'center', type: 'error', text: errorThrown});
                 }
         });
         return false; // Previne o form de ser enviado pela forma normal
@@ -68,4 +70,5 @@ function setConteudo(pagina) {
 		}
 	});
 }
+
 

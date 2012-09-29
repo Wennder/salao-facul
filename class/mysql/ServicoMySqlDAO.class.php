@@ -1,20 +1,20 @@
 <?php
 /**
- * Class that operate on table 'usuario'. Database Mysql.
+ * Class that operate on table 'servico'. Database Mysql.
  *
  * @author: http://phpdao.com
  * @date: 2012-09-29 18:01
  */
-class UsuarioMySqlDAO implements UsuarioDAO{
+class ServicoMySqlDAO implements ServicoDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @return UsuarioMySql 
+	 * @return ServicoMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM usuario WHERE id = ?';
+		$sql = 'SELECT * FROM servico WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -24,7 +24,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	 * Get all records from table
 	 */
 	public function queryAll(){
-		$sql = 'SELECT * FROM usuario';
+		$sql = 'SELECT * FROM servico';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -35,17 +35,17 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	 * @param $orderColumn column name
 	 */
 	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM usuario ORDER BY '.$orderColumn;
+		$sql = 'SELECT * FROM servico ORDER BY '.$orderColumn;
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 	
 	/**
  	 * Delete record from table
- 	 * @param usuario primary key
+ 	 * @param servico primary key
  	 */
 	public function delete($id){
-		$sql = 'DELETE FROM usuario WHERE id = ?';
+		$sql = 'DELETE FROM servico WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
@@ -54,37 +54,35 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	/**
  	 * Insert record to table
  	 *
- 	 * @param UsuarioMySql usuario
+ 	 * @param ServicoMySql servico
  	 */
-	public function insert($usuario){
-		$sql = 'INSERT INTO usuario (nome, username, senha, tipo) VALUES (?, ?, ?, ?)';
+	public function insert($servico){
+		$sql = 'INSERT INTO servico (descricao, horas, valor) VALUES (?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($usuario->nome);
-		$sqlQuery->set($usuario->username);
-		$sqlQuery->set($usuario->senha);
-		$sqlQuery->set($usuario->tipo);
+		$sqlQuery->set($servico->descricao);
+		$sqlQuery->setNumber($servico->horas);
+		$sqlQuery->set($servico->valor);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$usuario->id = $id;
+		$servico->id = $id;
 		return $id;
 	}
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param UsuarioMySql usuario
+ 	 * @param ServicoMySql servico
  	 */
-	public function update($usuario){
-		$sql = 'UPDATE usuario SET nome = ?, username = ?, senha = ?, tipo = ? WHERE id = ?';
+	public function update($servico){
+		$sql = 'UPDATE servico SET descricao = ?, horas = ?, valor = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($usuario->nome);
-		$sqlQuery->set($usuario->username);
-		$sqlQuery->set($usuario->senha);
-		$sqlQuery->set($usuario->tipo);
+		$sqlQuery->set($servico->descricao);
+		$sqlQuery->setNumber($servico->horas);
+		$sqlQuery->set($servico->valor);
 
-		$sqlQuery->setNumber($usuario->id);
+		$sqlQuery->setNumber($servico->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -92,63 +90,49 @@ class UsuarioMySqlDAO implements UsuarioDAO{
  	 * Delete all rows
  	 */
 	public function clean(){
-		$sql = 'DELETE FROM usuario';
+		$sql = 'DELETE FROM servico';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByNome($value){
-		$sql = 'SELECT * FROM usuario WHERE nome = ?';
+	public function queryByDescricao($value){
+		$sql = 'SELECT * FROM servico WHERE descricao = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByUsername($value){
-		$sql = 'SELECT * FROM usuario WHERE username = ?';
+	public function queryByHoras($value){
+		$sql = 'SELECT * FROM servico WHERE horas = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
+		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryBySenha($value){
-		$sql = 'SELECT * FROM usuario WHERE senha = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-
-	public function queryByTipo($value){
-		$sql = 'SELECT * FROM usuario WHERE tipo = ?';
+	public function queryByValor($value){
+		$sql = 'SELECT * FROM servico WHERE valor = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByNome($value){
-		$sql = 'DELETE FROM usuario WHERE nome = ?';
+	public function deleteByDescricao($value){
+		$sql = 'DELETE FROM servico WHERE descricao = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByUsername($value){
-		$sql = 'DELETE FROM usuario WHERE username = ?';
+	public function deleteByHoras($value){
+		$sql = 'DELETE FROM servico WHERE horas = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
+		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteBySenha($value){
-		$sql = 'DELETE FROM usuario WHERE senha = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByTipo($value){
-		$sql = 'DELETE FROM usuario WHERE tipo = ?';
+	public function deleteByValor($value){
+		$sql = 'DELETE FROM servico WHERE valor = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
@@ -159,18 +143,17 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	/**
 	 * Read row
 	 *
-	 * @return UsuarioMySql 
+	 * @return ServicoMySql 
 	 */
 	protected function readRow($row){
-		$usuario = new Usuario();
+		$servico = new Servico();
 		
-		$usuario->id = $row['id'];
-		$usuario->nome = $row['nome'];
-		$usuario->username = $row['username'];
-		$usuario->senha = $row['senha'];
-		$usuario->tipo = $row['tipo'];
+		$servico->id = $row['id'];
+		$servico->descricao = $row['descricao'];
+		$servico->horas = $row['horas'];
+		$servico->valor = $row['valor'];
 
-		return $usuario;
+		return $servico;
 	}
 	
 	protected function getList($sqlQuery){
@@ -185,7 +168,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	/**
 	 * Get row
 	 *
-	 * @return UsuarioMySql 
+	 * @return ServicoMySql 
 	 */
 	protected function getRow($sqlQuery){
 		$tab = QueryExecutor::execute($sqlQuery);

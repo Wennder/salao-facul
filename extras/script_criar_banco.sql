@@ -94,6 +94,13 @@ CREATE TABLE IF NOT EXISTS utensilio (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE servico (
+	id int primary key not null auto_increment,
+	descricao varchar(80) not null,
+	horas int not null,
+	valor double
+);
+
 
 INSERT INTO cliente (nome, cpf, rg, username, senha, admin) VALUES ('Administrador', '54554', '545454', 'admin', 'admin', true);
 
