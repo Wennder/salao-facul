@@ -2,7 +2,7 @@
 
 body {
 	margin: 0px;
-    padding: 0;
+	padding: 0;
 	border: none;
 	font: 11px/1.5 Verdana, Arial, Helvetica, sans-serif;
 	background: white;
@@ -63,23 +63,6 @@ body {
 	color: black;
 }
 
-h1,h2,h3 {
-	margin: 0.8em 0;
-	font-size: 1.4em;
-}
-
-h2 {
-	font-size: 1.2em;
-}
-
-h3 {
-	font-size: 1.0em;
-}
-
-.dest {
-	color: #039;
-}
-
 #principal {
 	float: left;
 	width: 648px;
@@ -94,58 +77,12 @@ h3 {
 	float: left;
 }
 
-#licencas table {
-	padding: 0;
-	margin: 0;
-	border-collapse: collapse;
-	color: #333;
-	background: white;
+.titulo {
+	margin: 2px;
+	border: solid;
+	padding: 3px;
+	border-width: 1px;
+	border-color: gray;
+	background: lightBlue;
 }
-
-#licencas table a {
-	color: #3A4856;
-	text-decoration: none;
-	border-bottom: 1px solid #C6C8CB;
-}
-
-#licencas table a:visited {
-	color: #777;
-}
-
-#licencas table a:hover {
-	color: #000;
-}
-
-#licencas table caption {
-	text-align: left;
-	text-transform: uppercase;
-	padding-bottom: 10px;
-	font: 200% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS",
-		sans-serif;
-}
-
-#licencas table th {
-	background: white;
-	padding: 15px 10px;
-	color: black;
-	text-align: left;
-	font-weight: normal;
-}
-
-#licencas table tbody td,table tbody th {
-	padding: 10px;
-	text-align: left;
-}
-
-#licencas table tbody tr {
-	background: white;
-}
-
-#licencas table . tbody tr.odd {
-	background: #F0F2F4;
-}
-
-#licencas table tbody  tr:hover {
-	background: whiteSmoke;
-	color: #111;
 }

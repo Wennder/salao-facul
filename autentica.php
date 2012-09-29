@@ -7,39 +7,27 @@
 	$username = mysql_escape_string($_POST['username']);
 	$senha = mysql_escape_string($_POST['senha']);
 	
-	$status = new Status;
-	
 	if (strcmp(trim($username), '') == 0) {
-		$status->tipo = 'erro';
-		$status->info = 'Informe seu nome de usu&#225;rio';
-		echo json_encode($status);
+		echo json_encode(new Status('erro', 'Informe seu nome de usuário'));
 		return;
 	}
 	
 	if (strcmp(trim($senha), '') == 0) {
-		$status->tipo = 'erro';
-		$status->info = 'Informe sua senha';
-		echo json_encode($status);
+		echo json_encode(new Status('erro', 'Informe sua senha'));
 		return;
 	}
 	
 	$msg_erro = 'Usu&#225;rio ou senha inv&#225;lidos';
 	
-	$user = DAOFactory::getUsuarioDAO()->queryByUsername($username);
+	$user = DAOFactory::getClienteDAO()->queryByUsername($username);
 	if (!$user[0]) {
-		$status->tipo = 'erro';
-		$status->info = $msg_erro;
-		echo json_encode($status);
+		echo json_encode(new Status('erro', $msg_erro));
 	} else {
 		if (strcmp($user[0]->senha, $senha)== 0) {
 			$_SESSION['user'] = $user[0]; //seta o usuário que acabou de logar da session
-			$status->tipo = 'ok';
-			$status->info = $user[0]->username;
-			echo json_encode($status);
+			echo json_encode(new Status('ok', $user[0]->username));
 		} else {
-			$status->tipo = 'erro';
-			$status->info = $msg_erro;
-			echo json_encode($status);
+			echo json_encode(new Status('erro', $msg_erro));
 		}
 	}
 ?>

@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+	$("#loading").hide();
 	$("#loading").ajaxStart(function(){
 		$(this).show();
 	});
@@ -14,9 +15,11 @@ function submitForm() {
 	if (!$(jid).valid())
 		return false;
 	
-	var data = $(jid).find('input').serialize(); // Dados do formul·rio    
-
-        // Envia o formul·rio via Ajax
+	var data = $(jid).find('input').serialize(); // Dados do formul√°rio   
+	var pre = $(jid).find('.loading');
+	if (pre)
+		$(jid).find('.loading').html('<img src="images/ajax-loader.gif" />');
+        // Envia o formul√°rio via Ajax
         $.ajax({
                 type: 'POST',
                 url: $(jid).attr('action'),
@@ -25,16 +28,16 @@ function submitForm() {
                 {
                    var status = eval('(' + json + ')');
 				   if (status.tipo == 'ok') {
-					 
+					   alert('ok. ' + status.info);
 				   }
 				   else {
-						
+					   alert('erro. ' + status.info);
 				   }
 				   
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown)
                 {
-					
+                	alert(errorThrown);
                 }
         });
         return false; // Previne o form de ser enviado pela forma normal
@@ -65,3 +68,4 @@ function setConteudo(pagina) {
 		}
 	});
 }
+

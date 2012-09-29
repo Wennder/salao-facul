@@ -9,8 +9,13 @@
 	$user->username = mysql_escape_string($_POST['username']);
 	$user->senha = mysql_escape_string($_POST['senha']);
 	
-	DAOFactory::getClienteDAO()->insert($user);
+	try {
+		DAOFactory::getClienteDAO()->insert($user);
+		$transaction->commit();
+		echo json_encode(new Status('ok', 'Cliente salvo com sucesso!'));
+	}catch(exception $e) {
+		$transaction->rollback();
+		echo json_encode(new Status('erro', $e->getMessage()));
+	}
 	
-	$transaction->commit();
-
 ?>
