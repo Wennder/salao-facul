@@ -1,13 +1,4 @@
 
-CREATE TABLE IF NOT EXISTS usuario (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  nome varchar(100) NOT NULL,
-  username varchar(50) NOT NULL,
-  senha varchar(30) NOT NULL,
-  tipo varchar(20) NOT NULL,
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS funcionario (
   id int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(100) NOT NULL,

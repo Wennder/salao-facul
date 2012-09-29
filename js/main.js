@@ -29,6 +29,7 @@ function submitForm() {
                    load.empty();
                    var status = eval('(' + json + ')');
 				   if (status.tipo == 'ok') {
+					   $(jid).find('input').val('');
 					   noty({layout: 'center', type: 'success', text: status.info});
 				   }
 				   else {

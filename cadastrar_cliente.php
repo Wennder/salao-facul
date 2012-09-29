@@ -12,7 +12,7 @@
 	try {
 		DAOFactory::getClienteDAO()->insert($user);
 		$transaction->commit();
-		echo json_encode(new Status('ok', 'Cliente salvo com sucesso!'));
+		echo json_encode(new Status('ok', $user->nome .' salvo com sucesso!'));
 	}catch(exception $e) {
 		$transaction->rollback();
 		echo json_encode(new Status('erro', $e->getMessage()));

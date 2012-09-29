@@ -3,45 +3,84 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
-<form id="form_cad_cliente" style="margin: auto; width: 300px;" 
+<form id="form_cad_cliente" style="margin: auto; width: 100%;" 
 	action="cadastrar_cliente.php"
 	onsubmit="return false" 
 	onkeypress="if(checkEnter(event)){return submitForm()};">
 			<div class="titulo">
 				<table>
-						<tr>
+						<tr >
 						<td>Informe os dados do cliente</td>
 						<td><div class="loading"></div></td>
 						</tr>
 						</table>
 				</div>
-			<table>
-				<tr>
-				<td>
 					<table>
-						<tr>
+						<tr >
 						<td style="float: right">Nome:</td>
-						<td><input id="nome_cliente" type="text" name="nome" style="width: 100%" /></td>
+						<td><input type="text" name="nome" style="width: 100%" /></td>
 						</tr>
-						<tr>
+						<tr >
+						<td style="float: right">Endereco:</td>
+						<td><input type="text" name="endereco" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Rg:</td>
+						<td><input type="text" name="rg" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Cpf:</td>
+						<td><input type="text" name="cpf" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Data de nascimento:</td>
+						<td><input type="text" name="nasc" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Telefone:</td>
+						<td><input type="text" name="telefone" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Celular:</td>
+						<td><input type="text" name="celular" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Endereco / Trabalho:</td>
+						<td><input type="text" name="endereco_trabalho" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Telefone / Trabalho:</td>
+						<td><input type="text" name="telefone_trabalho" style="width: 100%" /></td>
+						</tr>
+						<tr >
+						<td style="float: right">Cabelo:</td>
+						<td><input type="text" name="cabelo" style="width: 100%" /></td>
+						</tr>
+						<tr >
 						<td style="float: right">Username:</td>
 						<td><input type="text" name="username" style="width: 100%" /></td>
 						</tr>
-						<tr>
+						<tr >
 						<td style="float: right">Senha:</td>
 						<td><input type="text" name="senha" style="width: 100%" /></td>
 						</tr>
 					</table>
-				</td>
-				<td>
-				</td>
-				</tr>
-			</table>
+					<table style="width: 100%">
+						<tr>
+							<td><button style="float: right;" class="btn-custom" onclick="return submitForm();">Salvar</button></td>
+						</tr>
+					</table>
 </form>
 <script type="text/javascript">
        $('#form_cad_cliente').validate({
             rules:{
                 nome:{
+                    required: true
+                },
+                cpf:{
+                    required: true
+                },
+                rg:{
                     required: true
                 },
 				username:{
@@ -54,14 +93,20 @@
             },
             messages:{
                 nome:{
-                    required: "Você deve informar o seu nome."
+                    required: "Você deve informar o nome."
+                },
+                cpf:{
+                    required: "Você deve informar o Cpf."
+                },
+                rg:{
+                    required: "Você deve informar o Rg."
                 },
 				username:{
-                    required: "Você deve informar o seu nome de usuário."
+                    required: "Você deve informar o nome de usuário."
                 },
 				senha:{
-                    required: "Você deve informar sua senha.",
-                    minlength: "Sua senha deve conter no mínimo 5 caracteres."
+                    required: "Você deve informar a senha.",
+                    minlength: "A senha deve conter no mínimo 5 caracteres."
                 }
             }
         });
