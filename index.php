@@ -12,7 +12,6 @@
 <body>	
 
 <div id="topo">
-<!-- <div id="loading">Carregando...</div> -->
 <div>Salão da Leda</div>
 </div>
 

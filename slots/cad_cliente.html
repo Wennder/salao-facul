@@ -3,73 +3,93 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
-<form id="form_cad_cliente" style="margin: auto; width: 100%;" 
+<form id="form_cad_cliente" style="margin: auto; width: 350px;" 
 	action="cadastrar_cliente.php"
 	onsubmit="return false" 
 	onkeypress="if(checkEnter(event)){return submitForm()};">
 			<div class="titulo">
-				<table>
-						<tr >
-						<td>Informe os dados do cliente</td>
-						<td><div class="loading"></div></td>
-						</tr>
-						</table>
-				</div>
-					<table>
-						<tr >
-						<td style="float: right">Nome:</td>
-						<td><input type="text" name="nome" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Endereco:</td>
-						<td><input type="text" name="endereco" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Rg:</td>
-						<td><input type="text" name="rg" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Cpf:</td>
-						<td><input type="text" name="cpf" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Data de nascimento:</td>
-						<td><input type="text" name="nasc" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Telefone:</td>
-						<td><input type="text" name="telefone" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Celular:</td>
-						<td><input type="text" name="celular" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Endereco / Trabalho:</td>
-						<td><input type="text" name="endereco_trabalho" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Telefone / Trabalho:</td>
-						<td><input type="text" name="telefone_trabalho" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Cabelo:</td>
-						<td><input type="text" name="cabelo" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Username:</td>
-						<td><input type="text" name="username" style="width: 100%" /></td>
-						</tr>
-						<tr >
-						<td style="float: right">Senha:</td>
-						<td><input type="text" name="senha" style="width: 100%" /></td>
-						</tr>
-					</table>
-					<table style="width: 100%">
-						<tr>
-							<td><button style="float: right;" class="btn-custom" onclick="return submitForm();">Salvar</button></td>
-						</tr>
-					</table>
+				<span style="float: left;">Informe os dados do cliente</span>
+<!-- 				<div class="loading" style="float: right;"></div> -->
+			</div>
+			
+			<div class="cadastro">
+				<fieldset>
+					<legend>
+						<strong>Nome</strong>
+					</legend>
+					<input type="text" name="nome" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Endereco</strong>
+					</legend>
+					<input type="text" name="endereco" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Rg</strong>
+					</legend>
+					<input type="text" name="rg" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Cpf</strong>
+					</legend>
+					<input type="text" name="cpf" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Data de nascimento</strong>
+					</legend>
+					<input type="text" name="nasc" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Telefone</strong>
+					</legend>
+					<input type="text" name="telefone" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Celular</strong>
+					</legend>
+					<input type="text" name="celular" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Endereco / Trabalho</strong>
+					</legend>
+					<input type="text" name="end_trab" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Telefone / Trabalho</strong>
+					</legend>
+					<input type="text" name="fone_trab" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Cabelo</strong>
+					</legend>
+					<input type="text" name="cabelo" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Username</strong>
+					</legend>
+					<input type="text" name="username" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Senha</strong>
+					</legend>
+					<input type="text" name="senha" />
+				</fieldset>
+			</div>
+			<div style="width: 100%">
+				<div class="loading" style="float: left;"></div>
+				<button style="float: right;" class="btn-custom" onclick="return submitForm();">Salvar</button>
+			</div>
 </form>
 <script type="text/javascript">
        $('#form_cad_cliente').validate({
@@ -108,7 +128,8 @@
                     required: "Você deve informar a senha.",
                     minlength: "A senha deve conter no mínimo 5 caracteres."
                 }
-            }
+            },
+            wrapper: "div class=\"error\""
         });
 </script>
 </body>

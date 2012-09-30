@@ -78,19 +78,34 @@ body {
 
 .titulo {
 /* 	margin: 2px; */
-	border-bottom: solid;
+/* 	border-bottom: solid; */
 	padding: 3px;
 	border-width: 1px;
-	border-color: darkGray;
-	font-style: italic;
+/* 	border-color: darkGray; */
+/* 	font-style: italic; */
 	font-weight: bold;
 	font-size: 12px;
 /* 	background: lightBlue; */
+	height: 25px;
 }
 
-tr.space > td
-{
-  padding-bottom: 1em;
+fieldset {
+	border: none;	
+}
+
+form input {
+	width: 100%;
+}
+
+.error {
+	color: #DD4B39;
+}
+
+.cadastro {
+	border: solid;
+	background: whiteSmoke;
+	border-width: 1px;
+	border-color: #E5E5E5;
 }
 
 .btn-custom {
