@@ -5,8 +5,8 @@
 <body>
 	<div class="titulo" style="margin: auto; width: 350px;">
 		<span style="float: left;">Informe os dados do servico</span>
-		<div class="search" style="float: right;">
-		<button>Pesquisar</button>
+		<div style="float: right;">
+		<button class="btn btn-primary" onclick="javascript:setConteudo('slots/pesquisa_servicos.php');">Pesquisar</button>
 		</div>
 	</div>
 	
@@ -14,29 +14,15 @@
 	action="cadastrar_servico.php"
 	onsubmit="return false" 
 	onkeypress="if(checkEnter(event)){return submitForm()};">
-			<div class="cadastro">
-				<fieldset>
-					<legend>
-						<strong>Descrição</strong>
-					</legend>
-					<input type="text" name="descricao" />
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>Valor</strong>
-					</legend>
-					<input type="text" name="valor" />
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>Horas</strong>
-					</legend>
-					<input type="text" name="horas" />
-				</fieldset>
-			</div>
+				<label>Descrição</label>
+				<input type="text" name="descricao" />
+				<label>Valor</label>
+				<input type="text" name="valor" />
+				<label>Horas</label>
+				<input type="text" name="horas" />
 			<div style="width: 100%">
 				<div class="loading" style="float: left;"></div>
-				<button style="float: right;" class="btn-custom" onclick="return submitForm();">Salvar</button>
+				<button style="float: right;" class="btn" onclick="return submitForm();">Salvar</button>
 			</div>
 </form>
 <script type="text/javascript">

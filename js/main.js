@@ -60,16 +60,20 @@ function checkEnter(e) {
 	  return false;
 }
 
-function setConteudo(pagina) {
-	$('#conteudo').empty();
+function setConteudo(pagina, slot) {
+	if (!slot)
+		slot = 'conteudo';
+	
+	$('#'+slot).empty();
 	$.ajax({
 		type: "GET",
 		url: pagina,
 	
 		success: function(data){
-			$('#conteudo').html(data); 	
+			$('#'+slot).html(data); 	
 		}
 	});
 }
+
 
 

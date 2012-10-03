@@ -96,7 +96,7 @@ class ServicoMySqlDAO implements ServicoDAO{
 	}
 
 	public function queryByDescricao($value){
-		$sql = 'SELECT * FROM servico WHERE descricao = ?';
+		$sql = 'SELECT * FROM servico WHERE descricao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
