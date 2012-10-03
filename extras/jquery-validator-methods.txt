@@ -1,0 +1,43 @@
+Methods:
+required( )	Returns: Boolean
+Makes the element always required.
+required( dependency-expression )	Returns: Boolean
+Makes the element required, depending on the result of the given expression.
+required( dependency-callback )	Returns: Boolean
+Makes the element required, depending on the result of the given callback.
+remote( options )	Returns: Boolean
+Requests a resource to check the element for validity.
+minlength( length )	Returns: Boolean
+Makes the element require a given minimum length.
+maxlength( length )	Returns: Boolean
+Makes the element require a given maxmimum length.
+rangelength( range )	Returns: Boolean
+Makes the element require a given value range.
+min( value )	Returns: Boolean
+Makes the element require a given minimum.
+max( value )	Returns: Boolean
+Makes the element require a given maximum.
+range( range )	Returns: Boolean
+Makes the element require a given value range.
+email( )	Returns: Boolean
+Makes the element require a valid email
+url( )	Returns: Boolean
+Makes the element require a valid url
+date( )	Returns: Boolean
+Makes the element require a date.
+dateISO( )	Returns: Boolean
+Makes the element require a ISO date.
+number( )	Returns: Boolean
+Makes the element require a decimal number.
+digits( )	Returns: Boolean
+Makes the element require digits only.
+creditcard( )	Returns: Boolean
+Makes the element require a creditcard number.
+accept( extension )	Returns: Boolean
+Makes the element require a certain file extension.
+equalTo( other )	Returns: Boolean
+Requires the element to be the same as another one
+Some more methods are provided as addons, currently included in additional-methods.js in the download package.
+
+Plugins/Validation/CustomMethods/minWordsPlugins/Validation/CustomMethods/maxWordsPlugins/Validation/CustomMethods/rangeWords
+phoneUS( )	Returns: Boolean
