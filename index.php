@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
 <body>	
@@ -19,9 +20,10 @@
 
 <div id="nav">
 <ul>
-	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Cadastro de clientes</a></li>
-	<li><a id="op_cad_funcionario" href="javascript:setConteudo('slots/cad_funcionario.html');">Cadastro de funcionário</a></li>
-	<li><a id="op_cad_produto" href="javascript:setConteudo('slots/cad_produto.html');">Cadastro de produto</a></li>
+	<li><a id="op_cad_servico" href="javascript:setConteudo('slots/pesquisa_servicos.php');">Serviços</a></li>
+	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Clientes</a></li>
+	<li><a id="op_cad_funcionario" href="javascript:setConteudo('slots/cad_funcionario.html');">Funcionários</a></li>
+	<li><a id="op_cad_produto" href="javascript:setConteudo('slots/cad_produto.html');">Produtos</a></li>
 	<li><a id="op_sair" href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
 </ul>
 </div>
@@ -39,7 +41,7 @@
 <script src="js/jquery.validate-BR.js" type="text/javascript"></script>
 <script src="js/noty/jquery.noty.js" type="text/javascript"></script>
 <script src="js/noty/themes/default.js" type="text/javascript"></script>  
-<!-- <script src="js/noty/layouts/top.js" type="text/javascript" ></script> -->
+<script src="js/bootstrap.min.js"></script>
 <script src="js/noty/layouts/center.js" type="text/javascript"></script>
 <script src="js/main.js" type="text/javascript"></script>
 
