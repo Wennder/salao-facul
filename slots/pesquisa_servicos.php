@@ -4,9 +4,9 @@
 </head>
 <body>
 	<div style="margin: auto; width: 400px;">
-	<div class="form-inline">
+	<div sytle="height: 37px">
 	<button class="btn btn-primary" onclick="javascript:setConteudo('slots/cad_servico.html');">Novo serviço</button>
-	<input id="search" type="text" class="input-small" style="float: right;" placeholder="Pesquisar">
+	<input id="search" type="text" class="input-small" style="float: right; width: 150px;" placeholder="Pesquisar">
 	</div>
 	<div id="pesquisa">
 	
