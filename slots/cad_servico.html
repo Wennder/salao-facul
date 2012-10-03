@@ -4,13 +4,14 @@
 </head>
 <body>
 	<div class="titulo" style="margin: auto; width: 350px;">
-		<span style="float: left;">Informe os dados do produto</span>
+		<span style="float: left;">Informe os dados do servico</span>
 		<div class="search" style="float: right;">
 		<button>Pesquisar</button>
 		</div>
 	</div>
-<form id="form_cad_produto" style="margin: auto; width: 350px;" 
-	action="cadastrar_produto.php"
+	
+<form id="form_cad_servico" style="margin: auto; width: 350px;" 
+	action="cadastrar_servico.php"
 	onsubmit="return false" 
 	onkeypress="if(checkEnter(event)){return submitForm()};">
 			<div class="cadastro">
@@ -22,33 +23,15 @@
 				</fieldset>
 				<fieldset>
 					<legend>
-						<strong>Qtde estoque</strong>
+						<strong>Valor</strong>
 					</legend>
-					<input type="text" name="qtde" />
+					<input type="text" name="valor" />
 				</fieldset>
 				<fieldset>
 					<legend>
-						<strong>Qtde última compra</strong>
+						<strong>Horas</strong>
 					</legend>
-					<input type="text" name="qtde_ultima_compra" />
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>Valor unitário</strong>
-					</legend>
-					<input type="text" name="valor_unit" />
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>Marca</strong>
-					</legend>
-					<input type="text" name="marca" />
-				</fieldset>
-				<fieldset>
-					<legend>
-						<strong>Data</strong>
-					</legend>
-					<input type="text" name="data" />
+					<input type="text" name="horas" />
 				</fieldset>
 			</div>
 			<div style="width: 100%">
@@ -57,29 +40,31 @@
 			</div>
 </form>
 <script type="text/javascript">
-       $('#form_cad_produto').validate({
+       $('#form_cad_servico').validate({
             rules:{
                 descricao:{
                     required: true
                 },
-                valor_unit:{
+                valor:{
                     required: true,
                     number: true
                 },
-                data: {
-                	dateBR: true
+                horas: {
+                	required: true,
+                	number: true
                 }
             },
             messages:{
             	descricao:{
-                    required: "Você deve informar a descrição."
+                    required: "Você deve informar a descrição do serviço."
                 },
-                valor_unit:{
-                    required: "Você deve informar o valor unitário.",
+                valor:{
+                    required: "Você deve informar quanto custará o serviço.",
                     number: "Informe um valor válido"
                 },
-                data: {
-                	dateBR: "Informe uma data válida"
+                horas: {
+                	required: "Você deve informar quanto tempo (em horas) levará para realizar o serviço",
+                	number: "Informe um horário válido"
                 }
             },
             wrapper: "div class=\"error\""

@@ -19,9 +19,10 @@
 
 <div id="nav">
 <ul>
-	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Cadastro de clientes</a></li>
-	<li><a id="op_cad_funcionario" href="javascript:setConteudo('slots/cad_funcionario.html');">Cadastro de funcionário</a></li>
-	<li><a id="op_cad_produto" href="javascript:setConteudo('slots/cad_produto.html');">Cadastro de produto</a></li>
+	<li><a id="op_cad_servico" href="javascript:setConteudo('slots/cad_servico.html');">Serviços</a></li>
+	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Clientes</a></li>
+	<li><a id="op_cad_funcionario" href="javascript:setConteudo('slots/cad_funcionario.html');">Funcionários</a></li>
+	<li><a id="op_cad_produto" href="javascript:setConteudo('slots/cad_produto.html');">Produtos</a></li>
 	<li><a id="op_sair" href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
 </ul>
 </div>
