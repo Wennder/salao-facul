@@ -20,9 +20,9 @@
 <div id="nav">
 <ul>
 	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Cadastro de clientes</a></li>
-	<li><a id="linkLicenca" href="javascript:setConteudo('slots/cad_funcionario.html');">Cadastro de funcionário</a></li>
-	<li><a id="linkConsulta" href="javascript:setConteudo('slots/cad_produto.html');">Cadastro de produto</a></li>
-	<li><a id="linkSair" href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
+	<li><a id="op_cad_funcionario" href="javascript:setConteudo('slots/cad_funcionario.html');">Cadastro de funcionário</a></li>
+	<li><a id="op_cad_produto" href="javascript:setConteudo('slots/cad_produto.html');">Cadastro de produto</a></li>
+	<li><a id="op_sair" href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
 </ul>
 </div>
 
@@ -36,7 +36,7 @@
 </div>
 
 <script src="js/jquery-1.7.2.js" type="text/javascript"></script>  
-<script src="js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="js/jquery.validate-BR.js" type="text/javascript"></script>
 <script src="js/noty/jquery.noty.js" type="text/javascript"></script>
 <script src="js/noty/themes/default.js" type="text/javascript"></script>  
 <!-- <script src="js/noty/layouts/top.js" type="text/javascript" ></script> -->

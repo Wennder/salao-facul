@@ -3,44 +3,85 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
-<form id="form_cad_produto" style="margin: auto; width: 300px;" 
+<form id="form_cad_produto" style="margin: auto; width: 350px;" 
 	action="cadastrar_produto.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm('form_cad_produto')};">
-			<h2>Informe os dados do produto</h2>
-			<table>
-				<tr>
-				<td>
-					<table>
-						<tr>
-						<td style="float: right">Nome:</td>
-						<td><input type="text" name="nome" style="width: 100%" /></td>
-						</tr>
-						<tr>
-						<td style="float: right">Username:</td>
-						<td><input type="text" name="email" style="width: 100%" /></td>
-						</tr>
-					</table>
-				</td>
-				<td>
-				</td>
-				</tr>
-			</table>
+	onkeypress="if(checkEnter(event)){return submitForm()};">
+			<div class="titulo">
+				<span style="float: left;">Informe os dados do produto</span>
+<!-- 				<div class="loading" style="float: right;"></div> -->
+			</div>
+			
+			<div class="cadastro">
+				<fieldset>
+					<legend>
+						<strong>Descrição</strong>
+					</legend>
+					<input type="text" name="descricao" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Qtde estoque</strong>
+					</legend>
+					<input type="text" name="qtde" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Qtde última compra</strong>
+					</legend>
+					<input type="text" name="qtde_ultima_compra" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Valor unitário</strong>
+					</legend>
+					<input type="text" name="valor_unit" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Marca</strong>
+					</legend>
+					<input type="text" name="marca" />
+				</fieldset>
+				<fieldset>
+					<legend>
+						<strong>Data</strong>
+					</legend>
+					<input type="text" name="data" />
+				</fieldset>
+			</div>
+			<div style="width: 100%">
+				<div class="loading" style="float: left;"></div>
+				<button style="float: right;" class="btn-custom" onclick="return submitForm();">Salvar</button>
+			</div>
 </form>
 <script type="text/javascript">
        $('#form_cad_produto').validate({
             rules:{
-                nome:{
+                descricao:{
+                    required: true
+                },
+                valor_unit:{
                     required: true,
-                    minlength: 3
+                    number: true
+                },
+                data: {
+                	dateBR: true
                 }
             },
             messages:{
-                nome:{
-                    required: "O campo nome é obrigatorio.",
-                    minlength: "O campo nome deve conter no mínimo 3 caracteres."
+            	descricao:{
+                    required: "Você deve informar a descrição."
+                },
+                valor_unit:{
+                    required: "Você deve informar o valor unitário.",
+                    number: "Informe um valor válido"
+                },
+                data: {
+                	dateBR: "Informe uma data válida"
                 }
-            }
+            },
+            wrapper: "div class=\"error\""
         });
 </script>
 </body>
