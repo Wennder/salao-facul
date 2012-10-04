@@ -3,7 +3,7 @@
  * Class that operate on table 'produto'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-09-29 18:01
+ * @date: 2012-10-04 11:57
  */
 class ProdutoMySqlDAO implements ProdutoDAO{
 
@@ -109,35 +109,35 @@ class ProdutoMySqlDAO implements ProdutoDAO{
 	}
 
 	public function queryByQtdeEstoque($value){
-		$sql = 'SELECT * FROM produto WHERE qtde_estoque = ?';
+		$sql = 'SELECT * FROM produto WHERE qtde_estoque LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByQtdeUltimaCompra($value){
-		$sql = 'SELECT * FROM produto WHERE qtde_ultima_compra = ?';
+		$sql = 'SELECT * FROM produto WHERE qtde_ultima_compra LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByValorUnitario($value){
-		$sql = 'SELECT * FROM produto WHERE valor_unitario = ?';
+		$sql = 'SELECT * FROM produto WHERE valor_unitario LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByMarca($value){
-		$sql = 'SELECT * FROM produto WHERE marca = ?';
+		$sql = 'SELECT * FROM produto WHERE marca LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByData($value){
-		$sql = 'SELECT * FROM produto WHERE data = ?';
+		$sql = 'SELECT * FROM produto WHERE data LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);

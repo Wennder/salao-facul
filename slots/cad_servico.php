@@ -25,7 +25,7 @@
 <form id="form_cad_servico" style="margin: auto; width: 350px;" 
 	action="cadastrar_servico.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm()};">
+	onkeypress="if(checkEnter(event)){return submitForm(true)};">
 				<input type="hidden" name="id" <?php if($editando){echo "value=\"".$serv->id."\"";}?> />
 				<label>Descrição</label>
 				<input type="text" name="descricao" <?php if($editando){echo "value=\"".$serv->descricao."\"";}?> />

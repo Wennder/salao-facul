@@ -6,5 +6,7 @@
  * @date: 2012-09-29 17:58
  */
 class ServicoMySqlExtDAO extends ServicoMySqlDAO{
+
+	
 }
 ?>

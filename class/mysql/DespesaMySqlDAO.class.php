@@ -3,7 +3,7 @@
  * Class that operate on table 'despesa'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-09-29 18:01
+ * @date: 2012-10-04 11:57
  */
 class DespesaMySqlDAO implements DespesaDAO{
 
@@ -98,28 +98,28 @@ class DespesaMySqlDAO implements DespesaDAO{
 	}
 
 	public function queryByTipo($value){
-		$sql = 'SELECT * FROM despesa WHERE tipo = ?';
+		$sql = 'SELECT * FROM despesa WHERE tipo LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByTotal($value){
-		$sql = 'SELECT * FROM despesa WHERE total = ?';
+		$sql = 'SELECT * FROM despesa WHERE total LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByVencimento($value){
-		$sql = 'SELECT * FROM despesa WHERE vencimento = ?';
+		$sql = 'SELECT * FROM despesa WHERE vencimento LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDataSistema($value){
-		$sql = 'SELECT * FROM despesa WHERE data_sistema = ?';
+		$sql = 'SELECT * FROM despesa WHERE data_sistema LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);

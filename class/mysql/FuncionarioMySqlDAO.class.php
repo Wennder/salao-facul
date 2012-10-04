@@ -3,7 +3,7 @@
  * Class that operate on table 'funcionario'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-09-29 18:01
+ * @date: 2012-10-04 11:57
  */
 class FuncionarioMySqlDAO implements FuncionarioDAO{
 
@@ -113,49 +113,49 @@ class FuncionarioMySqlDAO implements FuncionarioDAO{
 	}
 
 	public function queryByEndereco($value){
-		$sql = 'SELECT * FROM funcionario WHERE endereco = ?';
+		$sql = 'SELECT * FROM funcionario WHERE endereco LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCpf($value){
-		$sql = 'SELECT * FROM funcionario WHERE cpf = ?';
+		$sql = 'SELECT * FROM funcionario WHERE cpf LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByRg($value){
-		$sql = 'SELECT * FROM funcionario WHERE rg = ?';
+		$sql = 'SELECT * FROM funcionario WHERE rg LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByTelefone($value){
-		$sql = 'SELECT * FROM funcionario WHERE telefone = ?';
+		$sql = 'SELECT * FROM funcionario WHERE telefone LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCargo($value){
-		$sql = 'SELECT * FROM funcionario WHERE cargo = ?';
+		$sql = 'SELECT * FROM funcionario WHERE cargo LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDataAdmissao($value){
-		$sql = 'SELECT * FROM funcionario WHERE data_admissao = ?';
+		$sql = 'SELECT * FROM funcionario WHERE data_admissao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByObs($value){
-		$sql = 'SELECT * FROM funcionario WHERE obs = ?';
+		$sql = 'SELECT * FROM funcionario WHERE obs LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);

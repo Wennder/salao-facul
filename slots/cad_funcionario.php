@@ -15,16 +15,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
-	<div class="titulo" style="margin: auto; width: 350px;">
+	<div class="titulo" style="margin: auto; width: 400px;">
 		<span style="float: left;">Informe os dados do funcionário</span>
 		<div style="float: right;">
 		<button class="btn btn-primary" onclick="javascript:setConteudo('slots/pesquisa_funcionarios.php');">Pesquisar</button>
 		</div>
 	</div>
-<form id="form_cad_funcionario" style="margin: auto; width: 350px;" 
+<form id="form_cad_funcionario" style="margin: auto; width: 400px;" 
 	action="cadastrar_funcionario.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm()};">
+	onkeypress="if(checkEnter(event)){return submitForm(true)};">
 				<input type="hidden" name="id" <?php if($editando){echo "value=\"".$func->id."\"";}?> />
 				<label>Nome</label>
 				<input type="text" name="nome" <?php if($editando){echo "value=\"".$func->nome."\"";}?> />

@@ -3,7 +3,7 @@
  * Class that operate on table 'utensilio'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-09-29 18:01
+ * @date: 2012-10-04 11:57
  */
 class UtensilioMySqlDAO implements UtensilioDAO{
 
@@ -104,49 +104,49 @@ class UtensilioMySqlDAO implements UtensilioDAO{
 	}
 
 	public function queryByDescricao($value){
-		$sql = 'SELECT * FROM utensilio WHERE descricao = ?';
+		$sql = 'SELECT * FROM utensilio WHERE descricao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByValor($value){
-		$sql = 'SELECT * FROM utensilio WHERE valor = ?';
+		$sql = 'SELECT * FROM utensilio WHERE valor LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByQtde($value){
-		$sql = 'SELECT * FROM utensilio WHERE qtde = ?';
+		$sql = 'SELECT * FROM utensilio WHERE qtde LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDataFabricacao($value){
-		$sql = 'SELECT * FROM utensilio WHERE data_fabricacao = ?';
+		$sql = 'SELECT * FROM utensilio WHERE data_fabricacao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDataRecebimento($value){
-		$sql = 'SELECT * FROM utensilio WHERE data_recebimento = ?';
+		$sql = 'SELECT * FROM utensilio WHERE data_recebimento LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDataEvento($value){
-		$sql = 'SELECT * FROM utensilio WHERE data_evento = ?';
+		$sql = 'SELECT * FROM utensilio WHERE data_evento LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByObs($value){
-		$sql = 'SELECT * FROM utensilio WHERE obs = ?';
+		$sql = 'SELECT * FROM utensilio WHERE obs LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);

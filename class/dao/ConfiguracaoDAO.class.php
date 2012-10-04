@@ -5,13 +5,13 @@
  * @author: http://phpdao.com
  * @date: 2012-10-04 11:57
  */
-interface FornecedorDAO{
+interface ConfiguracaoDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return Fornecedor 
+	 * @Return Configuracao 
 	 */
 	public function load($id);
 
@@ -28,53 +28,45 @@ interface FornecedorDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param fornecedor primary key
+ 	 * @param configuracao primary key
  	 */
 	public function delete($id);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param Fornecedor fornecedor
+ 	 * @param Configuracao configuracao
  	 */
-	public function insert($fornecedor);
+	public function insert($configuracao);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param Fornecedor fornecedor
+ 	 * @param Configuracao configuracao
  	 */
-	public function update($fornecedor);	
+	public function update($configuracao);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByNome($value);
-
-	public function queryByEndereco($value);
-
-	public function queryByEmail($value);
+	public function queryByNomeEmpresa($value);
 
 	public function queryByTelefone($value);
 
-	public function queryByCnpj($value);
+	public function queryByEmail($value);
 
-	public function queryByData($value);
+	public function queryByPercentualPadrao($value);
 
 
-	public function deleteByNome($value);
-
-	public function deleteByEndereco($value);
-
-	public function deleteByEmail($value);
+	public function deleteByNomeEmpresa($value);
 
 	public function deleteByTelefone($value);
 
-	public function deleteByCnpj($value);
+	public function deleteByEmail($value);
 
-	public function deleteByData($value);
+	public function deleteByPercentualPadrao($value);
 
 
 }

@@ -13,7 +13,10 @@
 <body>	
 
 <div id="topo">
-<div>Salão da Leda</div>
+<div style="float: left; height: 100%; text-align: center;"><span>Salão da Leda</span></div>
+<div style="float: right;">
+	<button class="btn" onclick="javascript:setConteudo('slots/configuracoes_sistema.php');" >Configurações</button>
+</div>
 </div>
 
 <div id="tudo">

@@ -3,7 +3,7 @@
  * Class that operate on table 'cliente'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-09-29 18:01
+ * @date: 2012-10-04 11:57
  */
 class ClienteMySqlDAO implements ClienteDAO{
 
@@ -123,84 +123,84 @@ class ClienteMySqlDAO implements ClienteDAO{
 	}
 
 	public function queryByEndereco($value){
-		$sql = 'SELECT * FROM cliente WHERE endereco = ?';
+		$sql = 'SELECT * FROM cliente WHERE endereco LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCpf($value){
-		$sql = 'SELECT * FROM cliente WHERE cpf = ?';
+		$sql = 'SELECT * FROM cliente WHERE cpf LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByRg($value){
-		$sql = 'SELECT * FROM cliente WHERE rg = ?';
+		$sql = 'SELECT * FROM cliente WHERE rg LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByNasc($value){
-		$sql = 'SELECT * FROM cliente WHERE nasc = ?';
+		$sql = 'SELECT * FROM cliente WHERE nasc LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByTelefone($value){
-		$sql = 'SELECT * FROM cliente WHERE telefone = ?';
+		$sql = 'SELECT * FROM cliente WHERE telefone LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCelular($value){
-		$sql = 'SELECT * FROM cliente WHERE celular = ?';
+		$sql = 'SELECT * FROM cliente WHERE celular LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByEnderecoTrabalho($value){
-		$sql = 'SELECT * FROM cliente WHERE endereco_trabalho = ?';
+		$sql = 'SELECT * FROM cliente WHERE endereco_trabalho LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByTelefoneTrabalho($value){
-		$sql = 'SELECT * FROM cliente WHERE telefone_trabalho = ?';
+		$sql = 'SELECT * FROM cliente WHERE telefone_trabalho LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCabelo($value){
-		$sql = 'SELECT * FROM cliente WHERE cabelo = ?';
+		$sql = 'SELECT * FROM cliente WHERE cabelo LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByUsername($value){
-		$sql = 'SELECT * FROM cliente WHERE username = ?';
+		$sql = 'SELECT * FROM cliente WHERE username LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryBySenha($value){
-		$sql = 'SELECT * FROM cliente WHERE senha = ?';
+		$sql = 'SELECT * FROM cliente WHERE senha LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByAdmin($value){
-		$sql = 'SELECT * FROM cliente WHERE admin = ?';
+		$sql = 'SELECT * FROM cliente WHERE admin LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);

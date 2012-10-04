@@ -22,6 +22,13 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return ConfiguracaoDAO
+	 */
+	public static function getConfiguracaoDAO(){
+		return new ConfiguracaoMySqlExtDAO();
+	}
+
+	/**
 	 * @return DespesaDAO
 	 */
 	public static function getDespesaDAO(){
@@ -54,13 +61,6 @@ class DAOFactory{
 	 */
 	public static function getServicoDAO(){
 		return new ServicoMySqlExtDAO();
-	}
-
-	/**
-	 * @return UsuarioDAO
-	 */
-	public static function getUsuarioDAO(){
-		return new UsuarioMySqlExtDAO();
 	}
 
 	/**

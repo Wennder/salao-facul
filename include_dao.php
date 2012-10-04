@@ -17,6 +17,10 @@
 	require_once('class/dto/Compra.class.php');
 	require_once('class/mysql/CompraMySqlDAO.class.php');
 	require_once('class/mysql/ext/CompraMySqlExtDAO.class.php');
+	require_once('class/dao/ConfiguracaoDAO.class.php');
+	require_once('class/dto/Configuracao.class.php');
+	require_once('class/mysql/ConfiguracaoMySqlDAO.class.php');
+	require_once('class/mysql/ext/ConfiguracaoMySqlExtDAO.class.php');
 	require_once('class/dao/DespesaDAO.class.php');
 	require_once('class/dto/Despesa.class.php');
 	require_once('class/mysql/DespesaMySqlDAO.class.php');
@@ -37,10 +41,6 @@
 	require_once('class/dto/Servico.class.php');
 	require_once('class/mysql/ServicoMySqlDAO.class.php');
 	require_once('class/mysql/ext/ServicoMySqlExtDAO.class.php');
-	require_once('class/dao/UsuarioDAO.class.php');
-	require_once('class/dto/Usuario.class.php');
-	require_once('class/mysql/UsuarioMySqlDAO.class.php');
-	require_once('class/mysql/ext/UsuarioMySqlExtDAO.class.php');
 	require_once('class/dao/UtensilioDAO.class.php');
 	require_once('class/dto/Utensilio.class.php');
 	require_once('class/mysql/UtensilioMySqlDAO.class.php');

@@ -1,20 +1,20 @@
 <?php
 /**
- * Class that operate on table 'fornecedor'. Database Mysql.
+ * Class that operate on table 'configuracao'. Database Mysql.
  *
  * @author: http://phpdao.com
  * @date: 2012-10-04 11:57
  */
-class FornecedorMySqlDAO implements FornecedorDAO{
+class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @return FornecedorMySql 
+	 * @return ConfiguracaoMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM fornecedor WHERE id = ?';
+		$sql = 'SELECT * FROM configuracao WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -24,7 +24,7 @@ class FornecedorMySqlDAO implements FornecedorDAO{
 	 * Get all records from table
 	 */
 	public function queryAll(){
-		$sql = 'SELECT * FROM fornecedor';
+		$sql = 'SELECT * FROM configuracao';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -35,17 +35,17 @@ class FornecedorMySqlDAO implements FornecedorDAO{
 	 * @param $orderColumn column name
 	 */
 	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM fornecedor ORDER BY '.$orderColumn;
+		$sql = 'SELECT * FROM configuracao ORDER BY '.$orderColumn;
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 	
 	/**
  	 * Delete record from table
- 	 * @param fornecedor primary key
+ 	 * @param configuracao primary key
  	 */
 	public function delete($id){
-		$sql = 'DELETE FROM fornecedor WHERE id = ?';
+		$sql = 'DELETE FROM configuracao WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
@@ -54,41 +54,37 @@ class FornecedorMySqlDAO implements FornecedorDAO{
 	/**
  	 * Insert record to table
  	 *
- 	 * @param FornecedorMySql fornecedor
+ 	 * @param ConfiguracaoMySql configuracao
  	 */
-	public function insert($fornecedor){
-		$sql = 'INSERT INTO fornecedor (nome, endereco, email, telefone, cnpj, data) VALUES (?, ?, ?, ?, ?, ?)';
+	public function insert($configuracao){
+		$sql = 'INSERT INTO configuracao (nome_empresa, telefone, email, percentual_padrao) VALUES (?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($fornecedor->nome);
-		$sqlQuery->set($fornecedor->endereco);
-		$sqlQuery->set($fornecedor->email);
-		$sqlQuery->set($fornecedor->telefone);
-		$sqlQuery->set($fornecedor->cnpj);
-		$sqlQuery->set($fornecedor->data);
+		$sqlQuery->set($configuracao->nomeEmpresa);
+		$sqlQuery->set($configuracao->telefone);
+		$sqlQuery->set($configuracao->email);
+		$sqlQuery->set($configuracao->percentualPadrao);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$fornecedor->id = $id;
+		$configuracao->id = $id;
 		return $id;
 	}
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param FornecedorMySql fornecedor
+ 	 * @param ConfiguracaoMySql configuracao
  	 */
-	public function update($fornecedor){
-		$sql = 'UPDATE fornecedor SET nome = ?, endereco = ?, email = ?, telefone = ?, cnpj = ?, data = ? WHERE id = ?';
+	public function update($configuracao){
+		$sql = 'UPDATE configuracao SET nome_empresa = ?, telefone = ?, email = ?, percentual_padrao = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($fornecedor->nome);
-		$sqlQuery->set($fornecedor->endereco);
-		$sqlQuery->set($fornecedor->email);
-		$sqlQuery->set($fornecedor->telefone);
-		$sqlQuery->set($fornecedor->cnpj);
-		$sqlQuery->set($fornecedor->data);
+		$sqlQuery->set($configuracao->nomeEmpresa);
+		$sqlQuery->set($configuracao->telefone);
+		$sqlQuery->set($configuracao->email);
+		$sqlQuery->set($configuracao->percentualPadrao);
 
-		$sqlQuery->setNumber($fornecedor->id);
+		$sqlQuery->setNumber($configuracao->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -96,91 +92,63 @@ class FornecedorMySqlDAO implements FornecedorDAO{
  	 * Delete all rows
  	 */
 	public function clean(){
-		$sql = 'DELETE FROM fornecedor';
+		$sql = 'DELETE FROM configuracao';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByNome($value){
-		$sql = 'SELECT * FROM fornecedor WHERE nome LIKE ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-
-	public function queryByEndereco($value){
-		$sql = 'SELECT * FROM fornecedor WHERE endereco LIKE ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-
-	public function queryByEmail($value){
-		$sql = 'SELECT * FROM fornecedor WHERE email LIKE ?';
+	public function queryByNomeEmpresa($value){
+		$sql = 'SELECT * FROM configuracao WHERE nome_empresa LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByTelefone($value){
-		$sql = 'SELECT * FROM fornecedor WHERE telefone LIKE ?';
+		$sql = 'SELECT * FROM configuracao WHERE telefone LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByCnpj($value){
-		$sql = 'SELECT * FROM fornecedor WHERE cnpj LIKE ?';
+	public function queryByEmail($value){
+		$sql = 'SELECT * FROM configuracao WHERE email LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByData($value){
-		$sql = 'SELECT * FROM fornecedor WHERE data LIKE ?';
+	public function queryByPercentualPadrao($value){
+		$sql = 'SELECT * FROM configuracao WHERE percentual_padrao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByNome($value){
-		$sql = 'DELETE FROM fornecedor WHERE nome = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByEndereco($value){
-		$sql = 'DELETE FROM fornecedor WHERE endereco = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByEmail($value){
-		$sql = 'DELETE FROM fornecedor WHERE email = ?';
+	public function deleteByNomeEmpresa($value){
+		$sql = 'DELETE FROM configuracao WHERE nome_empresa = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByTelefone($value){
-		$sql = 'DELETE FROM fornecedor WHERE telefone = ?';
+		$sql = 'DELETE FROM configuracao WHERE telefone = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByCnpj($value){
-		$sql = 'DELETE FROM fornecedor WHERE cnpj = ?';
+	public function deleteByEmail($value){
+		$sql = 'DELETE FROM configuracao WHERE email = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByData($value){
-		$sql = 'DELETE FROM fornecedor WHERE data = ?';
+	public function deleteByPercentualPadrao($value){
+		$sql = 'DELETE FROM configuracao WHERE percentual_padrao = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
@@ -191,20 +159,18 @@ class FornecedorMySqlDAO implements FornecedorDAO{
 	/**
 	 * Read row
 	 *
-	 * @return FornecedorMySql 
+	 * @return ConfiguracaoMySql 
 	 */
 	protected function readRow($row){
-		$fornecedor = new Fornecedor();
+		$configuracao = new Configuracao();
 		
-		$fornecedor->id = $row['id'];
-		$fornecedor->nome = $row['nome'];
-		$fornecedor->endereco = $row['endereco'];
-		$fornecedor->email = $row['email'];
-		$fornecedor->telefone = $row['telefone'];
-		$fornecedor->cnpj = $row['cnpj'];
-		$fornecedor->data = $row['data'];
+		$configuracao->id = $row['id'];
+		$configuracao->nomeEmpresa = $row['nome_empresa'];
+		$configuracao->telefone = $row['telefone'];
+		$configuracao->email = $row['email'];
+		$configuracao->percentualPadrao = $row['percentual_padrao'];
 
-		return $fornecedor;
+		return $configuracao;
 	}
 	
 	protected function getList($sqlQuery){
@@ -219,7 +185,7 @@ class FornecedorMySqlDAO implements FornecedorDAO{
 	/**
 	 * Get row
 	 *
-	 * @return FornecedorMySql 
+	 * @return ConfiguracaoMySql 
 	 */
 	protected function getRow($sqlQuery){
 		$tab = QueryExecutor::execute($sqlQuery);

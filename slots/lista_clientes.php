@@ -15,7 +15,10 @@
 	<?php if (sizeof($clientes) == 0) 
 	{
 		echo "<div style=\"height: 100px; text-align: center; padding: 11px; font-size: 12px;\">";
-		echo "<span>Sem resultados para <strong>$param</strong></span>";
+		if ($param != null || !empty($param))
+			echo "<span>Sem resultados para <strong>$param</strong></span>";
+		else
+			echo "<span>Nenhum cliente cadastrado ainda!</span>";
 		echo "</div>";
 	}
 	else 

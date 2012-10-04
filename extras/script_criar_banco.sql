@@ -92,6 +92,14 @@ CREATE TABLE servico (
 	valor double
 );
 
+CREATE TABLE configuracao (
+	id int primary key not null auto_increment,
+	nome_empresa varchar(80),
+	telefone varchar(30),
+	email varchar(80),
+	percentual_padrao double
+);
+
 
 INSERT INTO cliente (nome, cpf, rg, username, senha, admin) VALUES ('Administrador', '54554', '545454', 'admin', 'admin', true);
 

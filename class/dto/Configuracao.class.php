@@ -1,19 +1,17 @@
 <?php
 	/**
-	 * Object represents table 'fornecedor'
+	 * Object represents table 'configuracao'
 	 *
      	 * @author: http://phpdao.com
      	 * @date: 2012-10-04 11:57	 
 	 */
-	class Fornecedor{
+	class Configuracao{
 		
 		var $id;
-		var $nome;
-		var $endereco;
-		var $email;
+		var $nomeEmpresa;
 		var $telefone;
-		var $cnpj;
-		var $data;
+		var $email;
+		var $percentualPadrao;
 		
 	}
 ?>

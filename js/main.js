@@ -7,7 +7,7 @@ $(document).ready(function(){
 	
 });
 
-function submitForm() {
+function submitForm(limpar) {
 	var jid='#'+$(event.target).closest("form").attr('id');
 	if (!$(jid).valid())
 		return false;
@@ -26,7 +26,8 @@ function submitForm() {
                    load.empty();
                    var status = eval('(' + json + ')');
 				   if (status.tipo == 'ok') {
-					   $(jid).find('input').val('');
+					   if (limpar)
+						   $(jid).find('input').val('');
 					   noty({layout: 'center', type: 'success', text: status.info});
 				   }
 				   else {

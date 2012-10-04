@@ -3,7 +3,7 @@
 	 * Object represents table 'funcionario'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2012-09-29 18:01	 
+     	 * @date: 2012-10-04 11:57	 
 	 */
 	class Funcionario{
 		
