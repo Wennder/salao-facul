@@ -106,7 +106,7 @@ class FuncionarioMySqlDAO implements FuncionarioDAO{
 	}
 
 	public function queryByNome($value){
-		$sql = 'SELECT * FROM funcionario WHERE nome = ?';
+		$sql = 'SELECT * FROM funcionario WHERE nome LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);

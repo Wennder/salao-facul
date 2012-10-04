@@ -5,7 +5,7 @@
 <body>
 	<div style="margin: auto; width: 100%;">
 	<div sytle="height: 37px">
-	<button class="btn btn-primary" onclick="javascript:setConteudo('slots/cad_servico.php');">Novo serviço</button>
+	<button class="btn btn-primary" onclick="javascript:setConteudo('slots/cad_funcionario.php');">Novo cliente</button>
 	<input id="search" type="text" class="input-small" style="float: right; width: 150px;" placeholder="Pesquisar">
 	</div>
 	<div id="pesquisa">
@@ -14,10 +14,10 @@
 	</div>
 	
 <script type="text/javascript">
-	setConteudo('slots/lista_servicos.php', 'pesquisa');
+	setConteudo('slots/lista_funcionarios.php', 'pesquisa');
 	$('#search').keypress(function () {
 		if (checkEnter(event)) {
-			setConteudo('slots/lista_servicos.php?param=' + $('#search').val(), 'pesquisa');
+			setConteudo('slots/lista_funcionarios.php?param=' + $('#search').val(), 'pesquisa');
 		}
 	});
 </script>

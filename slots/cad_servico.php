@@ -1,3 +1,15 @@
+<?php		
+	include_once('../verificar_logado.php');
+	require_once('../include_dao.php');
+	
+	$id = $_GET['id'];
+	$editando = $id != null;
+	
+	if ($editando) {
+		$serv = DAOFactory::getServicoDAO()->load($id);
+	}
+?>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -14,12 +26,13 @@
 	action="cadastrar_servico.php"
 	onsubmit="return false" 
 	onkeypress="if(checkEnter(event)){return submitForm()};">
+				<input type="hidden" name="id" <?php if($editando){echo "value=\"".$serv->id."\"";}?> />
 				<label>Descrição</label>
-				<input type="text" name="descricao" />
+				<input type="text" name="descricao" <?php if($editando){echo "value=\"".$serv->descricao."\"";}?> />
 				<label>Valor</label>
-				<input type="text" name="valor" />
+				<input type="text" name="valor" <?php if($editando){echo "value=\"".$serv->valor."\"";}?>/>
 				<label>Horas</label>
-				<input type="text" name="horas" />
+				<input type="text" name="horas" <?php if($editando){echo "value=\"".$serv->horas."\"";}?>/>
 			<div style="width: 100%">
 				<div class="loading" style="float: left;"></div>
 				<button style="float: right;" class="btn" onclick="return submitForm();">Salvar</button>

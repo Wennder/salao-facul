@@ -19,12 +19,12 @@
 <div id="tudo">
 
 <div id="nav">
-<ul>
-	<li><a id="op_cad_servico" href="javascript:setConteudo('slots/pesquisa_servicos.php');">Serviços</a></li>
-	<li><a id="op_cad_cliente" href="javascript:setConteudo('slots/cad_cliente.html');">Clientes</a></li>
-	<li><a id="op_cad_funcionario" href="javascript:setConteudo('slots/cad_funcionario.html');">Funcionários</a></li>
-	<li><a id="op_cad_produto" href="javascript:setConteudo('slots/cad_produto.html');">Produtos</a></li>
-	<li><a id="op_sair" href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
+<ul class="nav nav-tabs nav-stacked">
+	<li><a href="javascript:setConteudo('slots/pesquisa_servicos.php');">Serviços</a></li>
+	<li><a href="javascript:setConteudo('slots/pesquisa_clientes.php');">Clientes</a></li>
+	<li><a href="javascript:setConteudo('slots/pesquisa_funcionarios.php');">Funcionários</a></li>
+	<li><a href="javascript:setConteudo('slots/pesquisa_produtos.php');">Produtos</a></li>
+	<li><a href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
 </ul>
 </div>
 

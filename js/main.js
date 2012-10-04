@@ -1,12 +1,9 @@
 
 $(document).ready(function(){
-//	$("#loading").hide();
-//	$("#loading").ajaxStart(function(){
-//		$(this).show();
-//	});
-//	$("#loading").ajaxStop(function(){
-//		$(this).hide();
-//	}); 
+	$("#nav").find("a").click(function(){
+		$("#nav").find("li").removeClass("active");
+		$(event.target).parent().addClass("active");
+	});
 	
 });
 
@@ -18,7 +15,7 @@ function submitForm() {
 	var data = $(jid).find('input').serialize(); // Dados do formulário   
 	var load = $(jid).find('.loading');
 	if (load)
-		load.html('<img src="images/ajax-loader.gif" />');
+		load.html('<img src="img/ajax-loader.gif" />');
         // Envia o formulário via Ajax
         $.ajax({
                 type: 'POST',

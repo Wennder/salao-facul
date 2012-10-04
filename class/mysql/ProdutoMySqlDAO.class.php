@@ -102,7 +102,7 @@ class ProdutoMySqlDAO implements ProdutoDAO{
 	}
 
 	public function queryByDescricao($value){
-		$sql = 'SELECT * FROM produto WHERE descricao = ?';
+		$sql = 'SELECT * FROM produto WHERE descricao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);

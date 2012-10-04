@@ -4,15 +4,15 @@
 
 	$transaction = new Transaction();
 
-	$user = (object)$_POST;
+	$func = (object)$_POST;
 	
 	try {
-		if (is_numeric($user->id))
-			DAOFactory::getClienteDAO()->update($user);
+		if (is_numeric($func->id))
+			DAOFactory::getFuncionarioDAO()->update($func);
 		else
-			DAOFactory::getClienteDAO()->insert($user);
+			DAOFactory::getFuncionarioDAO()->insert($func);
 		$transaction->commit();
-		echo json_encode(new Status('ok', $user->nome .' salvo com sucesso!'));
+		echo json_encode(new Status('ok', $func->nome .' salvo com sucesso!'));
 	}catch(exception $e) {
 		$transaction->rollback();
 		echo json_encode(new Status('erro', $e->getMessage()));

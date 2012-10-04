@@ -116,7 +116,7 @@ class ClienteMySqlDAO implements ClienteDAO{
 	}
 
 	public function queryByNome($value){
-		$sql = 'SELECT * FROM cliente WHERE nome = ?';
+		$sql = 'SELECT * FROM cliente WHERE nome LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
