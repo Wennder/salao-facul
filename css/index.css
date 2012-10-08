@@ -4,10 +4,7 @@ body {
 	margin: 0px;
 	padding: 0;
 	border: none;
-	font: 11px/1.5 Verdana, Arial, Helvetica, sans-serif;
 	background: white;
-	color: #333;
-	text-align: center;
 }
 
 #tudo {
@@ -64,6 +61,10 @@ body {
 
 form input {
 	width: 96%;
+}
+
+form select {
+	width: 100%;
 }
 
 .error {

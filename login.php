@@ -2,34 +2,30 @@
 <html>
 
 <head>
-<script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>  
-<script src="js/login_min.js" type="text/javascript"></script>
-<script src="js/main_min.js" type="text/javascript"></script>
-
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 </head>
 
 <body>	
-		<div style="margin: auto; width: 240px">
-			<h3 style="text-align: center">Autenticação de usuário</h3>
-			<table style="width: 100%">
-				<tr>
-				<td style="float: right">Usuário:</td>
-				<td><input type="text" name="username" id="username" style="width: 160px" onkeypress="return onEnter(logar, event);"/></td>
-				</tr>
-				<tr>
-				<td style="float: right">Senha:</td>
-				<td><input type="password" name="senha" id="senha" style="width: 160px" onkeypress="return onEnter(logar, event);"/></td>
-				</tr>
-				<tr>
-				<td></td>
-				<td><span id="loginErro" style="color: red"/></span></td>
-				</tr>
-				<tr>
-				<td></td>
-				<td><button onclick="logar()">Logar</button></td>
-				</tr>
+		<form id="form_cad_despesa" style="margin: auto; width: 240px;" 
+			onsubmit="return false" 
+			onkeypress="if(checkEnter(event)){return logar()};">
+			<legend>Autenticação de usuário</legend>
+				<label>Nome de usuário</label>
+				<input type="text" id="username"/>
+				<label>Senha</label>
+				<input type="password" id="senha"/>
+				<div class="error"">
+				<span id="loginErro"/></span>
+				</div>
+				<button class="btn" style="float: right;">Logar</button>
 			</table>	
-		</div>
+		</form>
+		
+<script src="js/jquery-1.7.2.js" type="text/javascript"></script>  
+<script src="js/login.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

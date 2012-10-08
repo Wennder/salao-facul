@@ -3,7 +3,7 @@
  * Class that operate on table 'despesa'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-04 11:57
+ * @date: 2012-10-04 13:50
  */
 class DespesaMySqlDAO implements DespesaDAO{
 
@@ -57,13 +57,14 @@ class DespesaMySqlDAO implements DespesaDAO{
  	 * @param DespesaMySql despesa
  	 */
 	public function insert($despesa){
-		$sql = 'INSERT INTO despesa (tipo, total, vencimento, data_sistema) VALUES (?, ?, ?, ?)';
+		$sql = 'INSERT INTO despesa (mes, ano, tipo, valor, data) VALUES (?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->set($despesa->mes);
+		$sqlQuery->setNumber($despesa->ano);
 		$sqlQuery->set($despesa->tipo);
-		$sqlQuery->set($despesa->total);
-		$sqlQuery->set($despesa->vencimento);
-		$sqlQuery->set($despesa->dataSistema);
+		$sqlQuery->set($despesa->valor);
+		$sqlQuery->set($despesa->data);
 
 		$id = $this->executeInsert($sqlQuery);	
 		$despesa->id = $id;
@@ -76,13 +77,14 @@ class DespesaMySqlDAO implements DespesaDAO{
  	 * @param DespesaMySql despesa
  	 */
 	public function update($despesa){
-		$sql = 'UPDATE despesa SET tipo = ?, total = ?, vencimento = ?, data_sistema = ? WHERE id = ?';
+		$sql = 'UPDATE despesa SET mes = ?, ano = ?, tipo = ?, valor = ?, data = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->set($despesa->mes);
+		$sqlQuery->setNumber($despesa->ano);
 		$sqlQuery->set($despesa->tipo);
-		$sqlQuery->set($despesa->total);
-		$sqlQuery->set($despesa->vencimento);
-		$sqlQuery->set($despesa->dataSistema);
+		$sqlQuery->set($despesa->valor);
+		$sqlQuery->set($despesa->data);
 
 		$sqlQuery->setNumber($despesa->id);
 		return $this->executeUpdate($sqlQuery);
@@ -97,6 +99,20 @@ class DespesaMySqlDAO implements DespesaDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function queryByMes($value){
+		$sql = 'SELECT * FROM despesa WHERE mes LIKE ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByAno($value){
+		$sql = 'SELECT * FROM despesa WHERE ano LIKE ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
 	public function queryByTipo($value){
 		$sql = 'SELECT * FROM despesa WHERE tipo LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -104,27 +120,34 @@ class DespesaMySqlDAO implements DespesaDAO{
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByTotal($value){
-		$sql = 'SELECT * FROM despesa WHERE total LIKE ?';
+	public function queryByValor($value){
+		$sql = 'SELECT * FROM despesa WHERE valor LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByVencimento($value){
-		$sql = 'SELECT * FROM despesa WHERE vencimento LIKE ?';
+	public function queryByData($value){
+		$sql = 'SELECT * FROM despesa WHERE data LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByDataSistema($value){
-		$sql = 'SELECT * FROM despesa WHERE data_sistema LIKE ?';
+
+	public function deleteByMes($value){
+		$sql = 'DELETE FROM despesa WHERE mes = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
+		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function deleteByAno($value){
+		$sql = 'DELETE FROM despesa WHERE ano = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
 
 	public function deleteByTipo($value){
 		$sql = 'DELETE FROM despesa WHERE tipo = ?';
@@ -133,22 +156,15 @@ class DespesaMySqlDAO implements DespesaDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByTotal($value){
-		$sql = 'DELETE FROM despesa WHERE total = ?';
+	public function deleteByValor($value){
+		$sql = 'DELETE FROM despesa WHERE valor = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByVencimento($value){
-		$sql = 'DELETE FROM despesa WHERE vencimento = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByDataSistema($value){
-		$sql = 'DELETE FROM despesa WHERE data_sistema = ?';
+	public function deleteByData($value){
+		$sql = 'DELETE FROM despesa WHERE data = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
@@ -165,10 +181,11 @@ class DespesaMySqlDAO implements DespesaDAO{
 		$despesa = new Despesa();
 		
 		$despesa->id = $row['id'];
+		$despesa->mes = $row['mes'];
+		$despesa->ano = $row['ano'];
 		$despesa->tipo = $row['tipo'];
-		$despesa->total = $row['total'];
-		$despesa->vencimento = $row['vencimento'];
-		$despesa->dataSistema = $row['data_sistema'];
+		$despesa->valor = $row['valor'];
+		$despesa->data = $row['data'];
 
 		return $despesa;
 	}

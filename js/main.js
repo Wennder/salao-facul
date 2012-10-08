@@ -5,14 +5,16 @@ $(document).ready(function(){
 		$(event.target).parent().addClass("active");
 	});
 	
+	setConteudo("slots/agenda.php");
+	
 });
 
-function submitForm(limpar) {
+function submitForm(nextcontent) {
 	var jid='#'+$(event.target).closest("form").attr('id');
 	if (!$(jid).valid())
 		return false;
 	
-	var data = $(jid).find('input').serialize(); // Dados do formulário   
+	var data = $(jid).find("select, input").serialize(); // Dados do formulário   
 	var load = $(jid).find('.loading');
 	if (load)
 		load.html('<img src="img/ajax-loader.gif" />');
@@ -26,8 +28,8 @@ function submitForm(limpar) {
                    load.empty();
                    var status = eval('(' + json + ')');
 				   if (status.tipo == 'ok') {
-					   if (limpar)
-						   $(jid).find('input').val('');
+					   if (nextcontent)
+						   setConteudo(nextcontent);
 					   noty({layout: 'center', type: 'success', text: status.info});
 				   }
 				   else {

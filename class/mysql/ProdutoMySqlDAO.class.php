@@ -3,7 +3,7 @@
  * Class that operate on table 'produto'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-04 11:57
+ * @date: 2012-10-04 13:50
  */
 class ProdutoMySqlDAO implements ProdutoDAO{
 

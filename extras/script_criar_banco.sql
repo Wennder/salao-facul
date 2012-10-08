@@ -41,15 +41,6 @@ CREATE TABLE IF NOT EXISTS produto (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS despesa (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  tipo varchar(30) NOT NULL,
-  total double,
-  vencimento datetime,
-  data_sistema datetime,
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS fornecedor (
   id int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(80) NOT NULL,
@@ -98,6 +89,15 @@ CREATE TABLE configuracao (
 	telefone varchar(30),
 	email varchar(80),
 	percentual_padrao double
+);
+
+CREATE TABLE despesa (
+	id int primary key not null auto_increment,
+	mes varchar(3),
+	ano int,
+	tipo varchar(80),
+	valor double,
+	data datetime
 );
 
 

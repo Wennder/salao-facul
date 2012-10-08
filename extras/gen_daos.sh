@@ -14,6 +14,7 @@ echo "Run script sql..."
 mysql -u root salao < $SCRIPT
 
 cd $GEN_PATH
+rm -rf $GEN_PATH/generated
 php generate.php
 cp $GEN_PATH/generated/include_dao.php $PROJECT_PATH
 rm -rf $PROJECT_PATH/class

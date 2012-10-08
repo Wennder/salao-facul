@@ -24,7 +24,7 @@
 <form id="form_cad_funcionario" style="margin: auto; width: 400px;" 
 	action="cadastrar_funcionario.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm(true)};">
+	onkeypress="if(checkEnter(event)){return submitForm('slots/pesquisa_funcionarios.php')};">
 				<input type="hidden" name="id" <?php if($editando){echo "value=\"".$func->id."\"";}?> />
 				<label>Nome</label>
 				<input type="text" name="nome" <?php if($editando){echo "value=\"".$func->nome."\"";}?> />

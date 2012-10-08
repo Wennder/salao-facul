@@ -20,7 +20,7 @@
 <form id="form_configuracoes" style="margin: auto; width: 350px;" 
 	action="cadastrar_configuracao.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm(false)};">
+	onkeypress="if(checkEnter(event)){return submitForm('slots/configuracoes_sistema.php')};">
 				<input type="hidden" name="id" <?php if($editando){echo "value=\"".$conf->id."\"";}?> />
 				<label>Nome da empresa</label>
 				<input type="text" name="nomeEmpresa" <?php if($editando){echo "value=\"".$conf->nomeEmpresa."\"";}?> />

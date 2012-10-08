@@ -24,7 +24,7 @@
 <form id="form_cad_cliente" style="margin: auto; width: 350px;" 
 	action="cadastrar_cliente.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm(true)};">
+	onkeypress="if(checkEnter(event)){return submitForm('slots/pesquisa_clientes.php')};">
 				<input type="hidden" name="id" <?php if($editando){echo "value=\"".$cli->id."\"";}?> />
 				<label>Nome</label>
 				<input type="text" name="nome" <?php if($editando){echo "value=\"".$cli->nome."\"";}?> />

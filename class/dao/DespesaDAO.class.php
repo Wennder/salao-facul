@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-10-04 11:57
+ * @date: 2012-10-04 13:50
  */
 interface DespesaDAO{
 
@@ -51,22 +51,26 @@ interface DespesaDAO{
 	 */
 	public function clean();
 
+	public function queryByMes($value);
+
+	public function queryByAno($value);
+
 	public function queryByTipo($value);
 
-	public function queryByTotal($value);
+	public function queryByValor($value);
 
-	public function queryByVencimento($value);
+	public function queryByData($value);
 
-	public function queryByDataSistema($value);
 
+	public function deleteByMes($value);
+
+	public function deleteByAno($value);
 
 	public function deleteByTipo($value);
 
-	public function deleteByTotal($value);
+	public function deleteByValor($value);
 
-	public function deleteByVencimento($value);
-
-	public function deleteByDataSistema($value);
+	public function deleteByData($value);
 
 
 }

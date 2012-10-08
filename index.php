@@ -1,5 +1,11 @@
 <?php		
-	include_once('verificar_logado.php');
+	//include_once('verificar_logado.php');
+	require_once('include_dao.php');
+	
+	session_start();
+	$user = $_SESSION['user'];
+	$isAdmin = $user != null && $user->admin;
+	
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
@@ -15,7 +21,14 @@
 <div id="topo">
 <div style="float: left; height: 100%; text-align: center;"><span>Salão da Leda</span></div>
 <div style="float: right;">
+	<?php 
+	if ($isAdmin) {
+	?>
 	<button class="btn" onclick="javascript:setConteudo('slots/configuracoes_sistema.php');" >Configurações</button>
+	<?php 
+	}
+	?>
+	
 </div>
 </div>
 
@@ -23,11 +36,24 @@
 
 <div id="nav">
 <ul class="nav nav-tabs nav-stacked">
+	<?php 
+	if ($isAdmin) {
+	?>
 	<li><a href="javascript:setConteudo('slots/pesquisa_servicos.php');">Serviços</a></li>
 	<li><a href="javascript:setConteudo('slots/pesquisa_clientes.php');">Clientes</a></li>
 	<li><a href="javascript:setConteudo('slots/pesquisa_funcionarios.php');">Funcionários</a></li>
 	<li><a href="javascript:setConteudo('slots/pesquisa_produtos.php');">Produtos</a></li>
-	<li><a href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $_SESSION['user']->username . ')</span>'?></a></li>
+	<li><a href="javascript:setConteudo('slots/cad_despesa.php');">Despesas</a></li>
+	<?php 
+	}
+		
+	if ($user != null) {
+	?>
+	<li><a href="logout.php">Sair<?php echo ' <span style="color: gray;">(' . $user->username . ')</span>'?></a></li>
+	<?php 
+	}
+	?>
+	
 </ul>
 </div>
 

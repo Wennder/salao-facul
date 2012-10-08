@@ -3,7 +3,7 @@
 	 * Object represents table 'fornecedor'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2012-10-04 11:57	 
+     	 * @date: 2012-10-04 13:50	 
 	 */
 	class Fornecedor{
 		

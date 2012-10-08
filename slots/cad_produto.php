@@ -24,7 +24,7 @@
 <form id="form_cad_produto" style="margin: auto; width: 350px;" 
 	action="cadastrar_produto.php"
 	onsubmit="return false" 
-	onkeypress="if(checkEnter(event)){return submitForm(true)};">
+	onkeypress="if(checkEnter(event)){return submitForm('slots/pesquisa_produtos.php')};">
 
 			<div class="cadastro">
 					<input type="hidden" name="id" <?php if($editando){echo "value=\"".$prod->id."\"";}?> />
