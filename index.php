@@ -37,6 +37,14 @@
 <div id="nav">
 <ul class="nav nav-tabs nav-stacked">
 	<?php 
+	if ($user != null) {
+	?>
+	<li class="active"><a href="javascript:setConteudo('slots/agenda.php');">Agenda</a></li>
+	<?php 
+	}
+	?>
+	
+	<?php 
 	if ($isAdmin) {
 	?>
 	<li><a href="javascript:setConteudo('slots/pesquisa_servicos.php');">Serviços</a></li>
