@@ -1,3 +1,4 @@
+var servicos;
 
 $(document).ready(function(){
 	$("#nav").find("a").click(function(){
@@ -172,22 +173,57 @@ function formatData(data) {
 	var mes = mesToStr(data.getMonth());
 	dia = (dia < 10 ? "0" + dia : dia);
 //	var ano = data.getFullYear();
-	return dayToStr(data.getDay()) + ", " + dia + " de " + mes;
+	return dayToStr(data.getDay()) + ", " + dia + " de " + mes + ", " + formatHora(data.getHours()) + " - " + formatHora(data.getHours()+1) ;
 }
 
 function getFormAgendar(dia, hora) {
+	var select = "<div class=\"input-append\"><select id=\"servico\" style=\"width: 260px;\">";
+	for (var i=0; i<servicos.length; i++) {
+		select += "<option>" + servicos[i].descricao + "</option>";
+	}
+	select += "</select><button class=\"btn\" onclick=\"addServicoNoAgendamento();\">+</button></div>";
+	
 	var html = 
 				"<div id=\"agendamento\">" +
 					"<form onsubmit=\"return false;\">" +
-						"<label>Dia</label>" +
-						"<input type=\"text\" value=\"" + formatData(dia) + "\" />" +
+						"<table><tr><td>" +
 						"<label>Horário</label>" +
-						"<input type=\"text\" value=\"" + formatHora(dia.getHours()) + " - " + formatHora(dia.getHours()+1) + "\" />" +
-						"<button class=\"btn\">Cancelar</button>" +
-						"<button class=\"btn btn-primary\">Agendar</button>" +
+						"<div class=\"input-append\">" +
+						"<input type=\"text\" value=\"" + formatData(dia) + "\" style=\"width: 240px;\" readonly=\"readonly\"/>" +
+						"</div>" +
+						"</td><td>" + 
+						"<label>O que deseja fazer?</label>" +
+						select +
+						"</td></tr><tr><td colspan=\"2\">" +
+						"<div id=\"servicos_escolhidos\"><table class=\"table\"></table></div>" +
+						"</td></tr></table>" +
+						"<div>" +
+						"<button style=\"float: right;\" class=\"btn\">Cancelar</button>" +
+						"<button style=\"float: right;\" class=\"btn btn-primary\">Agendar</button>" +
+						"</div>" +
 					"</form>" +
 				"</div>";
 	return html;
+}
+
+function addServicoNoAgendamento() {
+	var serv = $("#servico").val();
+	var table = $("#servicos_escolhidos").find("table");
+	var spans = table.find("span");
+	var jaTem = false;
+	for (var i=0; i<spans.length; i++) {
+		if (serv == $(spans[i]).text()) {
+			jaTem = true;
+			break;
+		}
+	}
+	
+	if (!jaTem) {
+		table.append("<tr><td><span>" + serv + "</span></td><td><a class=\"btn\">x</a></td></tr>");
+		table.find("a").click(function() {
+			table.remove($(this).parent().parent().remove());
+		});
+	}
 }
 
 
