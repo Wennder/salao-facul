@@ -1,20 +1,20 @@
 <?php
 /**
- * Class that operate on table 'configuracao'. Database Mysql.
+ * Class that operate on table 'agendamento'. Database Mysql.
  *
  * @author: http://phpdao.com
  * @date: 2012-10-08 23:22
  */
-class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
+class AgendamentoMySqlDAO implements AgendamentoDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @return ConfiguracaoMySql 
+	 * @return AgendamentoMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM configuracao WHERE id = ?';
+		$sql = 'SELECT * FROM agendamento WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -24,7 +24,7 @@ class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
 	 * Get all records from table
 	 */
 	public function queryAll(){
-		$sql = 'SELECT * FROM configuracao';
+		$sql = 'SELECT * FROM agendamento';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -35,17 +35,17 @@ class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
 	 * @param $orderColumn column name
 	 */
 	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM configuracao ORDER BY '.$orderColumn;
+		$sql = 'SELECT * FROM agendamento ORDER BY '.$orderColumn;
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 	
 	/**
  	 * Delete record from table
- 	 * @param configuracao primary key
+ 	 * @param agendamento primary key
  	 */
 	public function delete($id){
-		$sql = 'DELETE FROM configuracao WHERE id = ?';
+		$sql = 'DELETE FROM agendamento WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
@@ -54,37 +54,37 @@ class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
 	/**
  	 * Insert record to table
  	 *
- 	 * @param ConfiguracaoMySql configuracao
+ 	 * @param AgendamentoMySql agendamento
  	 */
-	public function insert($configuracao){
-		$sql = 'INSERT INTO configuracao (nome_empresa, telefone, email, percentual_padrao) VALUES (?, ?, ?, ?)';
+	public function insert($agendamento){
+		$sql = 'INSERT INTO agendamento (cliente_id, dia, inicio, duracao) VALUES (?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($configuracao->nomeEmpresa);
-		$sqlQuery->set($configuracao->telefone);
-		$sqlQuery->set($configuracao->email);
-		$sqlQuery->set($configuracao->percentualPadrao);
+		$sqlQuery->setNumber($agendamento->clienteId);
+		$sqlQuery->set($agendamento->dia);
+		$sqlQuery->set($agendamento->inicio);
+		$sqlQuery->setNumber($agendamento->duracao);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$configuracao->id = $id;
+		$agendamento->id = $id;
 		return $id;
 	}
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param ConfiguracaoMySql configuracao
+ 	 * @param AgendamentoMySql agendamento
  	 */
-	public function update($configuracao){
-		$sql = 'UPDATE configuracao SET nome_empresa = ?, telefone = ?, email = ?, percentual_padrao = ? WHERE id = ?';
+	public function update($agendamento){
+		$sql = 'UPDATE agendamento SET cliente_id = ?, dia = ?, inicio = ?, duracao = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($configuracao->nomeEmpresa);
-		$sqlQuery->set($configuracao->telefone);
-		$sqlQuery->set($configuracao->email);
-		$sqlQuery->set($configuracao->percentualPadrao);
+		$sqlQuery->setNumber($agendamento->clienteId);
+		$sqlQuery->set($agendamento->dia);
+		$sqlQuery->set($agendamento->inicio);
+		$sqlQuery->setNumber($agendamento->duracao);
 
-		$sqlQuery->setNumber($configuracao->id);
+		$sqlQuery->setNumber($agendamento->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -92,65 +92,65 @@ class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
  	 * Delete all rows
  	 */
 	public function clean(){
-		$sql = 'DELETE FROM configuracao';
+		$sql = 'DELETE FROM agendamento';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByNomeEmpresa($value){
-		$sql = 'SELECT * FROM configuracao WHERE nome_empresa LIKE ?';
+	public function queryByClienteId($value){
+		$sql = 'SELECT * FROM agendamento WHERE cliente_id LIKE ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByDia($value){
+		$sql = 'SELECT * FROM agendamento WHERE dia LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByTelefone($value){
-		$sql = 'SELECT * FROM configuracao WHERE telefone LIKE ?';
+	public function queryByInicio($value){
+		$sql = 'SELECT * FROM agendamento WHERE inicio LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByEmail($value){
-		$sql = 'SELECT * FROM configuracao WHERE email LIKE ?';
+	public function queryByDuracao($value){
+		$sql = 'SELECT * FROM agendamento WHERE duracao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-
-	public function queryByPercentualPadrao($value){
-		$sql = 'SELECT * FROM configuracao WHERE percentual_padrao LIKE ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
+		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByNomeEmpresa($value){
-		$sql = 'DELETE FROM configuracao WHERE nome_empresa = ?';
+	public function deleteByClienteId($value){
+		$sql = 'DELETE FROM agendamento WHERE cliente_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByDia($value){
+		$sql = 'DELETE FROM agendamento WHERE dia = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByTelefone($value){
-		$sql = 'DELETE FROM configuracao WHERE telefone = ?';
+	public function deleteByInicio($value){
+		$sql = 'DELETE FROM agendamento WHERE inicio = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByEmail($value){
-		$sql = 'DELETE FROM configuracao WHERE email = ?';
+	public function deleteByDuracao($value){
+		$sql = 'DELETE FROM agendamento WHERE duracao = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByPercentualPadrao($value){
-		$sql = 'DELETE FROM configuracao WHERE percentual_padrao = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
+		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -159,18 +159,18 @@ class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
 	/**
 	 * Read row
 	 *
-	 * @return ConfiguracaoMySql 
+	 * @return AgendamentoMySql 
 	 */
 	protected function readRow($row){
-		$configuracao = new Configuracao();
+		$agendamento = new Agendamento();
 		
-		$configuracao->id = $row['id'];
-		$configuracao->nomeEmpresa = $row['nome_empresa'];
-		$configuracao->telefone = $row['telefone'];
-		$configuracao->email = $row['email'];
-		$configuracao->percentualPadrao = $row['percentual_padrao'];
+		$agendamento->id = $row['id'];
+		$agendamento->clienteId = $row['cliente_id'];
+		$agendamento->dia = $row['dia'];
+		$agendamento->inicio = $row['inicio'];
+		$agendamento->duracao = $row['duracao'];
 
-		return $configuracao;
+		return $agendamento;
 	}
 	
 	protected function getList($sqlQuery){
@@ -185,7 +185,7 @@ class ConfiguracaoMySqlDAO implements ConfiguracaoDAO{
 	/**
 	 * Get row
 	 *
-	 * @return ConfiguracaoMySql 
+	 * @return AgendamentoMySql 
 	 */
 	protected function getRow($sqlQuery){
 		$tab = QueryExecutor::execute($sqlQuery);

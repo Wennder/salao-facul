@@ -8,6 +8,20 @@
 class DAOFactory{
 	
 	/**
+	 * @return AgendamentoDAO
+	 */
+	public static function getAgendamentoDAO(){
+		return new AgendamentoMySqlExtDAO();
+	}
+
+	/**
+	 * @return AgendamentoServicoDAO
+	 */
+	public static function getAgendamentoServicoDAO(){
+		return new AgendamentoServicoMySqlExtDAO();
+	}
+
+	/**
 	 * @return ClienteDAO
 	 */
 	public static function getClienteDAO(){

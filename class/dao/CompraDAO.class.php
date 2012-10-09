@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-10-04 13:50
+ * @date: 2012-10-08 23:22
  */
 interface CompraDAO{
 

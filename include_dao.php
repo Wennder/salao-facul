@@ -9,6 +9,14 @@
 	require_once('class/core/ArrayList.class.php');
 	require_once('class/dao/DAOFactory.class.php');
  	
+	require_once('class/dao/AgendamentoDAO.class.php');
+	require_once('class/dto/Agendamento.class.php');
+	require_once('class/mysql/AgendamentoMySqlDAO.class.php');
+	require_once('class/mysql/ext/AgendamentoMySqlExtDAO.class.php');
+	require_once('class/dao/AgendamentoServicoDAO.class.php');
+	require_once('class/dto/AgendamentoServico.class.php');
+	require_once('class/mysql/AgendamentoServicoMySqlDAO.class.php');
+	require_once('class/mysql/ext/AgendamentoServicoMySqlExtDAO.class.php');
 	require_once('class/dao/ClienteDAO.class.php');
 	require_once('class/dto/Cliente.class.php');
 	require_once('class/mysql/ClienteMySqlDAO.class.php');

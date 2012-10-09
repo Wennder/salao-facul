@@ -83,7 +83,8 @@ function criarAgenda() {
 	var count = dia + 6;
 	agenda.append("<table class=\"table table-bordered\"><thead><tr><th></th></tr></thead><tbody></tdoby>");
 	for (var i=dia; i<count; i++) {
-		agenda.find("thead tr").append("<th>" + dayToStr(now.getDay()) + " " + (dia++) + "/" + now.getMonth()+1 + "</th>");
+		var th = $("<th>" + dayToStr(now.getDay()) + " " + (dia++) + "/" + (now.getMonth()+1) + "</th>").appendTo(agenda.find("thead tr"));
+		$.data(th, "dia", now);
 		now.setDate(i+1);
 		if (now.getDay() == 0) {
 			now.setDate(i+2);
@@ -96,6 +97,10 @@ function criarAgenda() {
 	for (var i=7; i<21; i++) {
 		agenda.find("tbody").append("<tr><td>"+ formatHora(i) +"</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
 	}
+	
+	agenda.find("thead tr ::first-child").next().addClass("background-destacado");
+	agenda.find("tbody tr ::first-child").next().addClass("background-destacado");
+	
 	
 }
 
@@ -120,9 +125,70 @@ function dayToStr(day) {
 	}
 }
 
+function mesToStr(mes) {
+	switch (mes) {
+	case 0:
+		return "janeiro";
+	case 1:
+		return "fevereiro";
+	case 2:
+		return "março";
+	case 3:
+		return "abril";
+	case 4:
+		return "maio";
+	case 5:
+		return "junho";
+	case 6:
+		return "julho";
+	case 7:
+		return "agosto";
+	case 8:
+		return "setembro";
+	case 9:
+		return "outubro";
+	case 10:
+		return "novembro";
+	case 11:
+		return "dezembro";
+	default:
+		return "";
+	}
+}
+
 function formatHora(hora){
 	return (hora < 10 ? "0" + hora + ":00" : hora + ":00");
+}
+
+function formatHora2(hora){
+	var h1 = (hora < 10 ? "0" + hora + ":00" : hora + ":00");
+	hora++;
+	var h2 = (hora < 10 ? "0" + hora + ":00" : hora + ":00");
+	return h1 + " - " + h2;
 } 
+
+function formatData(data) {
+	var dia = data.getDate();
+	var mes = mesToStr(data.getMonth());
+	dia = (dia < 10 ? "0" + dia : dia);
+//	var ano = data.getFullYear();
+	return dayToStr(data.getDay()) + ", " + dia + " de " + mes;
+}
+
+function getFormAgendar(dia, hora) {
+	var html = 
+				"<div id=\"agendamento\">" +
+					"<form onsubmit=\"return false;\">" +
+						"<label>Dia</label>" +
+						"<input type=\"text\" value=\"" + formatData(dia) + "\" />" +
+						"<label>Horário</label>" +
+						"<input type=\"text\" value=\"" + formatHora(dia.getHours()) + " - " + formatHora(dia.getHours()+1) + "\" />" +
+						"<button class=\"btn\">Cancelar</button>" +
+						"<button class=\"btn btn-primary\">Agendar</button>" +
+					"</form>" +
+				"</div>";
+	return html;
+}
 
 
 

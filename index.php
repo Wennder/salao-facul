@@ -79,6 +79,7 @@
 <script src="js/noty/jquery.noty.js" type="text/javascript"></script>
 <script src="js/noty/themes/default.js" type="text/javascript"></script>  
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootbox.min.js"></script>
 <script src="js/noty/layouts/center.js" type="text/javascript"></script>
 <script src="js/main.js" type="text/javascript"></script>
 

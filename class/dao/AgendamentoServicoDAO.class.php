@@ -5,15 +5,15 @@
  * @author: http://phpdao.com
  * @date: 2012-10-08 23:22
  */
-interface ServicoDAO{
+interface AgendamentoServicoDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return Servico 
+	 * @Return AgendamentoServico 
 	 */
-	public function load($id);
+	public function load($idAgendamento, $idServico);
 
 	/**
 	 * Get all records from table
@@ -28,41 +28,29 @@ interface ServicoDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param servico primary key
+ 	 * @param agendamentoServico primary key
  	 */
-	public function delete($id);
+	public function delete($idAgendamento, $idServico);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param Servico servico
+ 	 * @param AgendamentoServico agendamentoServico
  	 */
-	public function insert($servico);
+	public function insert($agendamentoServico);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param Servico servico
+ 	 * @param AgendamentoServico agendamentoServico
  	 */
-	public function update($servico);	
+	public function update($agendamentoServico);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByDescricao($value);
-
-	public function queryByHoras($value);
-
-	public function queryByValor($value);
-
-
-	public function deleteByDescricao($value);
-
-	public function deleteByHoras($value);
-
-	public function deleteByValor($value);
 
 
 }

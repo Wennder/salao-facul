@@ -1,7 +1,7 @@
 CREATE TABLE servico (
 	id int primary key not null autoincrement,
 	descricao varchar(80) not null,
-	horas int not null
+	horas int not null,
 	valor double
 );
 
@@ -9,8 +9,8 @@ CREATE TABLE agendamento (
 	id int primary key not null autoincrement,
 	cliente_id int references usuario(id) not null,
 	dia date not null,
-	inicio varchar(20) null,
-	fim varchar(20) null,
+	inicio varchar(20) not null,
+	duracao int not null
 );
 
 CREATE TABLE agendamento_servico (

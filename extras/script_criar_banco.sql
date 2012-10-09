@@ -100,6 +100,20 @@ CREATE TABLE despesa (
 	data datetime
 );
 
+CREATE TABLE agendamento (
+	id int primary key not null auto_increment,
+	cliente_id int  not null references usuario(id),
+	dia date not null,
+	inicio varchar(20) not null,
+	duracao int not null
+);
+
+CREATE TABLE agendamento_servico (
+	id_agendamento int  not null references agendamento(id),
+	id_servico int not null references servico(id),
+	primary key (id_agendamento, id_servico)
+);
+
 
 INSERT INTO cliente (nome, cpf, rg, username, senha, admin) VALUES ('Administrador', '54554', '545454', 'admin', 'admin', true);
 
