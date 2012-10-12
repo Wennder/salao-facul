@@ -3,7 +3,7 @@
  * Class that operate on table 'agendamento_servico'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-08 23:22
+ * @date: 2012-10-10 00:17
  */
 class AgendamentoServicoMySqlDAO implements AgendamentoServicoDAO{
 

@@ -105,7 +105,7 @@ CREATE TABLE agendamento (
 	cliente_id int  not null references usuario(id),
 	dia date not null,
 	inicio varchar(20) not null,
-	duracao int not null
+	duracao int
 );
 
 CREATE TABLE agendamento_servico (
@@ -116,4 +116,5 @@ CREATE TABLE agendamento_servico (
 
 
 INSERT INTO cliente (nome, cpf, rg, username, senha, admin) VALUES ('Administrador', '54554', '545454', 'admin', 'admin', true);
+INSERT INTO cliente (nome, cpf, rg, username, senha, admin) VALUES ('Toni Santes', '54554', '545454', 'toni', '12345', false);
 

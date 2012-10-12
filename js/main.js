@@ -76,33 +76,78 @@ function setConteudo(pagina, slot) {
 	});
 }
 
-function criarAgenda() {
-	var agenda = $("#agenda");
-	agenda.empty();
-	var now = new Date();
-	var dia = now.getDate();
-	var count = dia + 6;
-	agenda.append("<table class=\"table table-bordered\"><thead><tr><th></th></tr></thead><tbody></tdoby>");
-	for (var i=dia; i<count; i++) {
-		var th = $("<th>" + dayToStr(now.getDay()) + " " + (dia++) + "/" + (now.getMonth()+1) + "</th>").appendTo(agenda.find("thead tr"));
-		$.data(th, "dia", now);
-		now.setDate(i+1);
-		if (now.getDay() == 0) {
-			now.setDate(i+2);
-			i++;
-			count++;
-			dia++;
-		}
-	}
-	
-	for (var i=7; i<21; i++) {
-		agenda.find("tbody").append("<tr><td>"+ formatHora(i) +"</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-	}
-	
-	agenda.find("thead tr ::first-child").next().addClass("background-destacado");
-	agenda.find("tbody tr ::first-child").next().addClass("background-destacado");
-	
-	
+function criarAgenda(semana) {
+	$.ajax({
+        type: 'GET',
+        url: "buscarAgenda.php?sem="+semana,
+        success: function(json)
+        {
+        	var age = eval('(' + json + ')');
+	       	var agenda = $("#agenda");
+	       	agenda.empty();
+	       	var now = new Date();
+	       	var dia = now.getDate();
+	       	var count = dia + 6;
+	       	agenda.append("<table class=\"table table-bordered\"><thead><tr><th></th></tr></thead><tbody></tdoby>");
+	       	for (var i=dia; i<count; i++) {
+	       		var th = $("<th>" + dayToStr(now.getDay()) + " " + (dia++) + "/" + (now.getMonth()+1) + "</th>").appendTo(agenda.find("thead tr"));
+	       		$.data(th, "dia", now);
+	       		now.setDate(i+1);
+	       		if (now.getDay() == 0) {
+	       			now.setDate(i+2);
+	       			i++;
+	       			count++;
+	       			dia++;
+	       		}
+	       	}
+	       	
+	       	for (var i=7; i<21; i++) {
+	       		agenda.find("tbody").append("<tr><td>"+ formatHora(i) +"</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+	       	}
+	       	
+	       	agenda.find("thead tr ::first-child").next().addClass("background-destacado");
+	       	agenda.find("tbody tr ::first-child").next().addClass("background-destacado");
+	       	
+	       	$("#agenda").find("td").popover({ 
+	    	    html : true,
+	    	    trigger: "manual",
+	    	    template: '<div class="popover agendamento"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+	    	    content: function() {
+	    	    	var th = $(this).closest('table').find('th').eq($(this).index());
+	    	      	var index = $(th).index();
+	    		  	var dia = new Date();
+	    		  	var diff = (dia.getDate()+index-1)-dia.getDate();
+	    		  	var inc = (diff+dia.getDay()) > 6 ? 1 : 0 ;
+	    		  	dia.setDate(dia.getDate() + inc);
+	    		  	dia.setDate(dia.getDate() + diff);
+	    		  	var hora = $(this).parent().find(":first").text().split(":")[0];
+	    		  	dia.setHours(hora);
+	    	     	return getFormAgendar(dia);
+	    	    }
+	    	  });
+
+	    	$("#agenda").find("td").filter(function(){
+	    		var th = $(this).closest('table').find('th').eq($(this).index());
+	    		return $(th).index() > 0; 
+	    	}).click(function(){
+	    		$("#agenda").find("td").popover("hide");
+	    		$(this).popover("show");
+	    	});
+
+	    	$("#agenda").find("td").filter(function(){
+	    		var th = $(this).closest('table').find('th').eq($(this).index());
+	    		return $(th).index() == 0; 
+	    	}).css("width", "20px");
+
+
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        	load.empty();
+        	noty({layout: 'center', type: 'error', text: errorThrown});
+        }
+	});
+
 }
 
 function dayToStr(day) {
@@ -173,15 +218,18 @@ function formatData(data) {
 	var mes = mesToStr(data.getMonth());
 	dia = (dia < 10 ? "0" + dia : dia);
 //	var ano = data.getFullYear();
-	return dayToStr(data.getDay()) + ", " + dia + " de " + mes + ", " + formatHora(data.getHours()) + " - " + formatHora(data.getHours()+1) ;
+	return dayToStr(data.getDay()) + ", " + dia + " de " + mes + ", " + formatHora(data.getHours()) ;
 }
 
-function getFormAgendar(dia, hora) {
+function getFormAgendar(dia) {
 	var select = "<div class=\"input-append\"><select id=\"servico\" style=\"width: 260px;\">";
 	for (var i=0; i<servicos.length; i++) {
 		select += "<option>" + servicos[i].descricao + "</option>";
 	}
 	select += "</select><button class=\"btn\" onclick=\"addServicoNoAgendamento();\">+</button></div>";
+	
+	var data = dia.getFullYear() + "-" + (dia.getMonth()+1) + "-" + dia.getDate();
+	var horario = formatHora(dia.getHours());
 	
 	var html = 
 				"<div id=\"agendamento\">" +
@@ -198,8 +246,8 @@ function getFormAgendar(dia, hora) {
 						"<div id=\"servicos_escolhidos\"><table class=\"table\"></table></div>" +
 						"</td></tr></table>" +
 						"<div>" +
-						"<button style=\"float: right;\" class=\"btn\">Cancelar</button>" +
-						"<button style=\"float: right;\" class=\"btn btn-primary\">Agendar</button>" +
+						"<button style=\"float: right;\" class=\"btn\" onclick=\"fecharPopovers();\">Cancelar</button>" +
+						"<button style=\"float: right;\" class=\"btn btn-primary\" onclick=\"agendar('" + data + "', '"+ horario +"')\">Agendar</button>" +
 						"</div>" +
 					"</form>" +
 				"</div>";
@@ -226,5 +274,41 @@ function addServicoNoAgendamento() {
 	}
 }
 
+function agendar(data, horario) {
+	var spans = $("#servicos_escolhidos").find("table").find("span");
+	var json = "[";
+	for (var i=0; i<spans.length; i++) {
+		json += "{\"descricao\":\"" + $(spans[i]).text() + "\"},";
+	}
+	
+	json = json.substring(0, json.length-1) + "]";
+	
+	$.ajax({
+        type: 'POST',
+        url: "agendar.php",
+        data: "dia=" + data + "&horario=" + horario + "&servicos=" + json,
+        success: function(data)
+        {
+        	fecharPopovers();
+        	var status = eval('(' + data + ')');
+			   if (status.tipo == 'ok') {
+				   noty({layout: 'center', type: 'success', text: status.info});
+			   }
+			   else {
+				   noty({layout: 'center', type: 'error', text: status.info});
+			   }
+			   
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        	noty({layout: 'center', type: 'error', text: errorThrown});
+        }
+	});
+	return false;
+}
+
+function fecharPopovers() {
+	 $("#agenda").find("td").popover("hide");
+}
 
 

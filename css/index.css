@@ -80,5 +80,10 @@ form select {
 	width: 600px;
 }
 
+#agenda td {
+	width: 70px;
+	height: 60px;
+}
+
 
 }

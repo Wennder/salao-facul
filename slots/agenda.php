@@ -24,34 +24,8 @@
 	<?php 
 		echo "servicos = eval('(' + '$servs_json' + ')');"; 
 	?>;
-	criarAgenda();
+	criarAgenda(0);
     
-	$("#agenda").find("td").popover({ 
-	    html : true,
-	    trigger: "manual",
-	    template: '<div class="popover agendamento"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-	    content: function() {
-	    	var th = $(this).closest('table').find('th').eq($(this).index());
-	      	var index = $(th).index();
-		  	var dia = new Date();
-		  	var diff = (dia.getDate()+index-1)-dia.getDate();
-		  	var inc = (diff+dia.getDay()) > 6 ? 1 : 0 ;
-		  	dia.setDate(dia.getDate() + inc);
-		  	dia.setDate(dia.getDate() + diff);
-		  	var hora = $(this).parent().find(":first").text().split(":")[0];
-		  	dia.setHours(hora);
-	     	return getFormAgendar(dia);
-	    }
-	  });
-
-	$("#agenda").find("td").filter(function(){
-		var th = $(this).closest('table').find('th').eq($(this).index());
-		return $(th).index() > 0; 
-	}).click(function(){
-		$("#agenda").find("td").popover("hide");
-		$(this).popover("show");
-	});
-	
 </script>
 </body>
 </html>

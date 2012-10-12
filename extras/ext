@@ -1,0 +1,5 @@
+	public function queryBetweenDatas($ini, $fim) {
+		$sql = "SELECT * FROM agendamento WHERE dia between '$ini' and '$fim'";
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
