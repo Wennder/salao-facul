@@ -1,18 +1,18 @@
 <?php
 	/**
-	 * Object represents table 'despesa'
+	 * Object represents table 'venda'
 	 *
      	 * @author: http://phpdao.com
      	 * @date: 2012-10-12 17:12	 
 	 */
-	class Despesa{
+	class Venda{
 		
 		var $id;
-		var $mes;
-		var $ano;
-		var $tipo;
-		var $valor;
+		var $clienteId;
 		var $data;
+		var $total;
+		var $totalPago;
+		var $obs;
 		
 	}
 ?>

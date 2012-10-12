@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-10-10 00:17
+ * @date: 2012-10-12 17:12
  */
 interface AgendamentoDAO{
 
@@ -58,8 +58,7 @@ interface AgendamentoDAO{
 	public function queryByInicio($value);
 
 	public function queryByDuracao($value);
-	
-	public function queryBetweenDatas($ini, $fim);
+
 
 	public function deleteByClienteId($value);
 
@@ -68,6 +67,7 @@ interface AgendamentoDAO{
 	public function deleteByInicio($value);
 
 	public function deleteByDuracao($value);
-	
+
+
 }
 ?>

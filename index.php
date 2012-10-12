@@ -47,6 +47,7 @@
 	<?php 
 	if ($isAdmin) {
 	?>
+	<li><a href="javascript:setConteudo('slots/cad_venda.php');">Vendas</a></li>	
 	<li><a href="javascript:setConteudo('slots/pesquisa_servicos.php');">Serviços</a></li>
 	<li><a href="javascript:setConteudo('slots/pesquisa_clientes.php');">Clientes</a></li>
 	<li><a href="javascript:setConteudo('slots/pesquisa_funcionarios.php');">Funcionários</a></li>

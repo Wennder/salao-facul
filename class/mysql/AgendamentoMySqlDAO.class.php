@@ -3,7 +3,7 @@
  * Class that operate on table 'agendamento'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-10 00:17
+ * @date: 2012-10-12 17:12
  */
 class AgendamentoMySqlDAO implements AgendamentoDAO{
 
@@ -108,12 +108,6 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 		$sql = 'SELECT * FROM agendamento WHERE dia LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-	
-	public function queryBetweenDatas($ini, $fim) {
-		$sql = "SELECT * FROM agendamento WHERE dia between '$ini' and '$fim'";
-		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 

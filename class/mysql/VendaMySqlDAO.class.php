@@ -1,20 +1,20 @@
 <?php
 /**
- * Class that operate on table 'usuario'. Database Mysql.
+ * Class that operate on table 'venda'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-09-29 18:01
+ * @date: 2012-10-12 17:12
  */
-class UsuarioMySqlDAO implements UsuarioDAO{
+class VendaMySqlDAO implements VendaDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @return UsuarioMySql 
+	 * @return VendaMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM usuario WHERE id = ?';
+		$sql = 'SELECT * FROM venda WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -24,7 +24,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	 * Get all records from table
 	 */
 	public function queryAll(){
-		$sql = 'SELECT * FROM usuario';
+		$sql = 'SELECT * FROM venda';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -35,17 +35,23 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	 * @param $orderColumn column name
 	 */
 	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM usuario ORDER BY '.$orderColumn;
+		$sql = 'SELECT * FROM venda ORDER BY '.$orderColumn;
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
+	
+	public function queryByParam($param) {
+		$sql = "SELECT v.* FROM venda v, cliente c WHERE v.cliente_id = c.id AND (c.nome LIKE '%$param%' OR c.username LIKE '%$param%') ORDER BY c.nome";
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 	
 	/**
  	 * Delete record from table
- 	 * @param usuario primary key
+ 	 * @param venda primary key
  	 */
 	public function delete($id){
-		$sql = 'DELETE FROM usuario WHERE id = ?';
+		$sql = 'DELETE FROM venda WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
@@ -54,37 +60,39 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	/**
  	 * Insert record to table
  	 *
- 	 * @param UsuarioMySql usuario
+ 	 * @param VendaMySql venda
  	 */
-	public function insert($usuario){
-		$sql = 'INSERT INTO usuario (nome, username, senha, tipo) VALUES (?, ?, ?, ?)';
+	public function insert($venda){
+		$sql = 'INSERT INTO venda (cliente_id, data, total, total_pago, obs) VALUES (?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($usuario->nome);
-		$sqlQuery->set($usuario->username);
-		$sqlQuery->set($usuario->senha);
-		$sqlQuery->set($usuario->tipo);
+		$sqlQuery->setNumber($venda->clienteId);
+		$sqlQuery->set($venda->data);
+		$sqlQuery->set($venda->total);
+		$sqlQuery->set($venda->totalPago);
+		$sqlQuery->set($venda->obs);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$usuario->id = $id;
+		$venda->id = $id;
 		return $id;
 	}
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param UsuarioMySql usuario
+ 	 * @param VendaMySql venda
  	 */
-	public function update($usuario){
-		$sql = 'UPDATE usuario SET nome = ?, username = ?, senha = ?, tipo = ? WHERE id = ?';
+	public function update($venda){
+		$sql = 'UPDATE venda SET cliente_id = ?, data = ?, total = ?, total_pago = ?, obs = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($usuario->nome);
-		$sqlQuery->set($usuario->username);
-		$sqlQuery->set($usuario->senha);
-		$sqlQuery->set($usuario->tipo);
+		$sqlQuery->setNumber($venda->clienteId);
+		$sqlQuery->set($venda->data);
+		$sqlQuery->set($venda->total);
+		$sqlQuery->set($venda->totalPago);
+		$sqlQuery->set($venda->obs);
 
-		$sqlQuery->setNumber($usuario->id);
+		$sqlQuery->setNumber($venda->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -92,85 +100,98 @@ class UsuarioMySqlDAO implements UsuarioDAO{
  	 * Delete all rows
  	 */
 	public function clean(){
-		$sql = 'DELETE FROM usuario';
+		$sql = 'DELETE FROM venda';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByNome($value){
-		$sql = 'SELECT * FROM usuario WHERE nome = ?';
+	public function queryByClienteId($value){
+		$sql = 'SELECT * FROM venda WHERE cliente_id LIKE ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByData($value){
+		$sql = 'SELECT * FROM venda WHERE data LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByUsername($value){
-		$sql = 'SELECT * FROM usuario WHERE username = ?';
+	public function queryByTotal($value){
+		$sql = 'SELECT * FROM venda WHERE total LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryBySenha($value){
-		$sql = 'SELECT * FROM usuario WHERE senha = ?';
+	public function queryByTotalPago($value){
+		$sql = 'SELECT * FROM venda WHERE total_pago LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByTipo($value){
-		$sql = 'SELECT * FROM usuario WHERE tipo = ?';
+	public function queryByObs($value){
+		$sql = 'SELECT * FROM venda WHERE obs LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByNome($value){
-		$sql = 'DELETE FROM usuario WHERE nome = ?';
+	public function deleteByClienteId($value){
+		$sql = 'DELETE FROM venda WHERE cliente_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByData($value){
+		$sql = 'DELETE FROM venda WHERE data = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByUsername($value){
-		$sql = 'DELETE FROM usuario WHERE username = ?';
+	public function deleteByTotal($value){
+		$sql = 'DELETE FROM venda WHERE total = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteBySenha($value){
-		$sql = 'DELETE FROM usuario WHERE senha = ?';
+	public function deleteByTotalPago($value){
+		$sql = 'DELETE FROM venda WHERE total_pago = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByTipo($value){
-		$sql = 'DELETE FROM usuario WHERE tipo = ?';
+	public function deleteByObs($value){
+		$sql = 'DELETE FROM venda WHERE obs = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
-
-
 	
 	/**
 	 * Read row
 	 *
-	 * @return UsuarioMySql 
+	 * @return VendaMySql 
 	 */
 	protected function readRow($row){
-		$usuario = new Usuario();
+		$venda = new Venda();
 		
-		$usuario->id = $row['id'];
-		$usuario->nome = $row['nome'];
-		$usuario->username = $row['username'];
-		$usuario->senha = $row['senha'];
-		$usuario->tipo = $row['tipo'];
+		$venda->id = $row['id'];
+		$venda->clienteId = $row['cliente_id'];
+		$venda->data = $row['data'];
+		$venda->total = $row['total'];
+		$venda->totalPago = $row['total_pago'];
+		$venda->obs = $row['obs'];
 
-		return $usuario;
+		return $venda;
 	}
 	
 	protected function getList($sqlQuery){
@@ -185,7 +206,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	/**
 	 * Get row
 	 *
-	 * @return UsuarioMySql 
+	 * @return VendaMySql 
 	 */
 	protected function getRow($sqlQuery){
 		$tab = QueryExecutor::execute($sqlQuery);

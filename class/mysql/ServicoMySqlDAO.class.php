@@ -3,7 +3,7 @@
  * Class that operate on table 'servico'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-10 00:17
+ * @date: 2012-10-12 17:12
  */
 class ServicoMySqlDAO implements ServicoDAO{
 
@@ -113,6 +113,12 @@ class ServicoMySqlDAO implements ServicoDAO{
 		$sql = 'SELECT * FROM servico WHERE valor LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+	
+	public function queryByVenda($venda_id){
+		$sql = "SELECT s.* FROM servico s, servico_venda sv WHERE s.id = sv.servico_id AND sv.venda_id = $venda_id";
+		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 

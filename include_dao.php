@@ -45,13 +45,25 @@
 	require_once('class/dto/Produto.class.php');
 	require_once('class/mysql/ProdutoMySqlDAO.class.php');
 	require_once('class/mysql/ext/ProdutoMySqlExtDAO.class.php');
+	require_once('class/dao/ProdutoVendaDAO.class.php');
+	require_once('class/dto/ProdutoVenda.class.php');
+	require_once('class/mysql/ProdutoVendaMySqlDAO.class.php');
+	require_once('class/mysql/ext/ProdutoVendaMySqlExtDAO.class.php');
 	require_once('class/dao/ServicoDAO.class.php');
 	require_once('class/dto/Servico.class.php');
 	require_once('class/mysql/ServicoMySqlDAO.class.php');
 	require_once('class/mysql/ext/ServicoMySqlExtDAO.class.php');
+	require_once('class/dao/ServicoVendaDAO.class.php');
+	require_once('class/dto/ServicoVenda.class.php');
+	require_once('class/mysql/ServicoVendaMySqlDAO.class.php');
+	require_once('class/mysql/ext/ServicoVendaMySqlExtDAO.class.php');
 	require_once('class/dao/UtensilioDAO.class.php');
 	require_once('class/dto/Utensilio.class.php');
 	require_once('class/mysql/UtensilioMySqlDAO.class.php');
 	require_once('class/mysql/ext/UtensilioMySqlExtDAO.class.php');
+	require_once('class/dao/VendaDAO.class.php');
+	require_once('class/dto/Venda.class.php');
+	require_once('class/mysql/VendaMySqlDAO.class.php');
+	require_once('class/mysql/ext/VendaMySqlExtDAO.class.php');
 
 ?>

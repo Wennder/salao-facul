@@ -82,7 +82,8 @@ function criarAgenda(semana) {
         url: "buscarAgenda.php?sem="+semana,
         success: function(json)
         {
-        	var age = eval('(' + json + ')');
+        	//var age = eval('(' + json + ')');
+        	
 	       	var agenda = $("#agenda");
 	       	agenda.empty();
 	       	var now = new Date();

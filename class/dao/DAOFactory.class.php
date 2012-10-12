@@ -71,6 +71,13 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return ProdutoVendaDAO
+	 */
+	public static function getProdutoVendaDAO(){
+		return new ProdutoVendaMySqlExtDAO();
+	}
+
+	/**
 	 * @return ServicoDAO
 	 */
 	public static function getServicoDAO(){
@@ -78,10 +85,24 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return ServicoVendaDAO
+	 */
+	public static function getServicoVendaDAO(){
+		return new ServicoVendaMySqlExtDAO();
+	}
+
+	/**
 	 * @return UtensilioDAO
 	 */
 	public static function getUtensilioDAO(){
 		return new UtensilioMySqlExtDAO();
+	}
+
+	/**
+	 * @return VendaDAO
+	 */
+	public static function getVendaDAO(){
+		return new VendaMySqlExtDAO();
 	}
 
 

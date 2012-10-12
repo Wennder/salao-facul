@@ -5,22 +5,22 @@
  * @author: http://phpdao.com
  * @date: 2012-10-12 17:12
  */
-interface ServicoDAO{
+interface ProdutoVendaDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return Servico 
+	 * @Return ProdutoVenda 
 	 */
-	public function load($id);
+	public function load($produtoId, $vendaId);
 
 	/**
 	 * Get all records from table
 	 */
 	public function queryAll();
 	
-	public function queryByVenda($venda_id);
+	public function queryByVenda($id_venda);
 	
 	/**
 	 * Get all records from table ordered by field
@@ -30,41 +30,35 @@ interface ServicoDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param servico primary key
+ 	 * @param produtoVenda primary key
  	 */
-	public function delete($id);
+	public function delete($produtoId, $vendaId);
+	
+	public function deleteVenda($vendaId);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param Servico servico
+ 	 * @param ProdutoVenda produtoVenda
  	 */
-	public function insert($servico);
+	public function insert($produtoVenda);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param Servico servico
+ 	 * @param ProdutoVenda produtoVenda
  	 */
-	public function update($servico);	
+	public function update($produtoVenda);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByDescricao($value);
-
-	public function queryByHoras($value);
-
-	public function queryByValor($value);
+	public function queryByQtde($value);
 
 
-	public function deleteByDescricao($value);
-
-	public function deleteByHoras($value);
-
-	public function deleteByValor($value);
+	public function deleteByQtde($value);
 
 
 }

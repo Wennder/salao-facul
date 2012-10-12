@@ -1,5 +1,50 @@
+	agenda
+	
 	public function queryBetweenDatas($ini, $fim) {
 		$sql = "SELECT * FROM agendamento WHERE dia between '$ini' and '$fim'";
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
+	}
+	
+	
+	venda
+	
+	public function queryByParam($param){
+		$sql = "SELECT v.* FROM venda v, cliente c WHERE v.cliente_id = c.id AND (c.nome LIKE '%$param%' OR c.username LIKE '%$param%') ORDER BY c.nome";
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
+	
+	servico venda
+	
+	public function queryByVenda($id_venda){
+		$sql = 'SELECT * FROM servico_venda WHERE venda_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($id_venda);
+		return $this->getList($sqlQuery);
+	}
+	
+	public function deleteVenda($vendaId){
+		$sql = 'DELETE FROM servico_venda WHERE venda_id = ? ';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($vendaId);
+	
+		return $this->executeUpdate($sqlQuery);
+	}
+	
+	produto venda
+	
+	public function queryByVenda($id_venda){
+		$sql = 'SELECT * FROM produto_venda WHERE venda_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($id_venda);
+		return $this->getList($sqlQuery);
+	}
+	
+	public function deleteVenda($vendaId){
+		$sql = 'DELETE FROM produto_venda WHERE venda_id = ? ';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($vendaId);
+	
+		return $this->executeUpdate($sqlQuery);
 	}

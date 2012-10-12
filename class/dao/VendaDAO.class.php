@@ -5,13 +5,13 @@
  * @author: http://phpdao.com
  * @date: 2012-10-12 17:12
  */
-interface ConfiguracaoDAO{
+interface VendaDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return Configuracao 
+	 * @Return Venda 
 	 */
 	public function load($id);
 
@@ -28,45 +28,50 @@ interface ConfiguracaoDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param configuracao primary key
+ 	 * @param venda primary key
  	 */
 	public function delete($id);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param Configuracao configuracao
+ 	 * @param Venda venda
  	 */
-	public function insert($configuracao);
+	public function insert($venda);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param Configuracao configuracao
+ 	 * @param Venda venda
  	 */
-	public function update($configuracao);	
+	public function update($venda);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByNomeEmpresa($value);
+	public function queryByClienteId($value);
 
-	public function queryByTelefone($value);
+	public function queryByData($value);
 
-	public function queryByEmail($value);
+	public function queryByTotal($value);
 
-	public function queryByPercentualPadrao($value);
+	public function queryByTotalPago($value);
 
+	public function queryByObs($value);
+	
+	public function queryByParam($param);
 
-	public function deleteByNomeEmpresa($value);
+	public function deleteByClienteId($value);
 
-	public function deleteByTelefone($value);
+	public function deleteByData($value);
 
-	public function deleteByEmail($value);
+	public function deleteByTotal($value);
 
-	public function deleteByPercentualPadrao($value);
+	public function deleteByTotalPago($value);
+
+	public function deleteByObs($value);
 
 
 }
