@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 interface CompraDAO{
 
@@ -51,6 +51,8 @@ interface CompraDAO{
 	 */
 	public function clean();
 
+	public function queryByFornecedorId($value);
+
 	public function queryByDescricao($value);
 
 	public function queryByTotal($value);
@@ -65,6 +67,8 @@ interface CompraDAO{
 
 	public function queryByData($value);
 
+
+	public function deleteByFornecedorId($value);
 
 	public function deleteByDescricao($value);
 

@@ -3,7 +3,7 @@
 	 * Object represents table 'agendamento'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2012-10-12 17:12	 
+     	 * @date: 2012-10-13 19:48	 
 	 */
 	class Agendamento{
 		

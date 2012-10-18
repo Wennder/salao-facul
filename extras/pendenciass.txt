@@ -1,0 +1,6 @@
+criar confirmação de cadastros
+
+exclusao cadastros
+
+tela de venda:
+	valor unitario = custo + percentual de venda

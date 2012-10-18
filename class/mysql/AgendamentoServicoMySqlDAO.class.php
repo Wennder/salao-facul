@@ -3,7 +3,7 @@
  * Class that operate on table 'agendamento_servico'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 class AgendamentoServicoMySqlDAO implements AgendamentoServicoDAO{
 
@@ -28,6 +28,13 @@ class AgendamentoServicoMySqlDAO implements AgendamentoServicoDAO{
 	public function queryAll(){
 		$sql = 'SELECT * FROM agendamento_servico';
 		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
+	
+	public function queryByAgendamento($id_agendamento){
+		$sql = 'SELECT * FROM agendamento_servico WHERE id_agendamento = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($id_agendamento);
 		return $this->getList($sqlQuery);
 	}
 	

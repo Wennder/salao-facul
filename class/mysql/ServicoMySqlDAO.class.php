@@ -3,7 +3,7 @@
  * Class that operate on table 'servico'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 class ServicoMySqlDAO implements ServicoDAO{
 
@@ -40,6 +40,12 @@ class ServicoMySqlDAO implements ServicoDAO{
 		return $this->getList($sqlQuery);
 	}
 	
+	public function queryByAgendamento($agendamento_id){
+		$sql = "SELECT servico.* FROM servico, agendamento_servico WHERE servico.id = agendamento_servico.id_servico AND agendamento_servico.id_agendamento=$agendamento_id";
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
+	
 	/**
  	 * Delete record from table
  	 * @param servico primary key
@@ -61,7 +67,7 @@ class ServicoMySqlDAO implements ServicoDAO{
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($servico->descricao);
-		$sqlQuery->setNumber($servico->horas);
+		$sqlQuery->set($servico->horas);
 		$sqlQuery->set($servico->valor);
 
 		$id = $this->executeInsert($sqlQuery);	
@@ -79,7 +85,7 @@ class ServicoMySqlDAO implements ServicoDAO{
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($servico->descricao);
-		$sqlQuery->setNumber($servico->horas);
+		$sqlQuery->set($servico->horas);
 		$sqlQuery->set($servico->valor);
 
 		$sqlQuery->setNumber($servico->id);
@@ -105,7 +111,7 @@ class ServicoMySqlDAO implements ServicoDAO{
 	public function queryByHoras($value){
 		$sql = 'SELECT * FROM servico WHERE horas LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
+		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
@@ -113,12 +119,6 @@ class ServicoMySqlDAO implements ServicoDAO{
 		$sql = 'SELECT * FROM servico WHERE valor LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-	
-	public function queryByVenda($venda_id){
-		$sql = "SELECT s.* FROM servico s, servico_venda sv WHERE s.id = sv.servico_id AND sv.venda_id = $venda_id";
-		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 
@@ -133,7 +133,7 @@ class ServicoMySqlDAO implements ServicoDAO{
 	public function deleteByHoras($value){
 		$sql = 'DELETE FROM servico WHERE horas = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
+		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 

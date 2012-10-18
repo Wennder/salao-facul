@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 interface AgendamentoServicoDAO{
 
@@ -19,6 +19,9 @@ interface AgendamentoServicoDAO{
 	 * Get all records from table
 	 */
 	public function queryAll();
+	
+	
+	public function queryByAgendamento($id_agendamento);
 	
 	/**
 	 * Get all records from table ordered by field

@@ -3,7 +3,7 @@
  * Class that operate on table 'compra'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 class CompraMySqlDAO implements CompraDAO{
 
@@ -57,9 +57,10 @@ class CompraMySqlDAO implements CompraDAO{
  	 * @param CompraMySql compra
  	 */
 	public function insert($compra){
-		$sql = 'INSERT INTO compra (descricao, total, qtde, numero_nota_fiscal, vencimento, nome_representante, data) VALUES (?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO compra (fornecedor_id, descricao, total, qtde, numero_nota_fiscal, vencimento, nome_representante, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->setNumber($compra->fornecedorId);
 		$sqlQuery->set($compra->descricao);
 		$sqlQuery->set($compra->total);
 		$sqlQuery->setNumber($compra->qtde);
@@ -79,9 +80,10 @@ class CompraMySqlDAO implements CompraDAO{
  	 * @param CompraMySql compra
  	 */
 	public function update($compra){
-		$sql = 'UPDATE compra SET descricao = ?, total = ?, qtde = ?, numero_nota_fiscal = ?, vencimento = ?, nome_representante = ?, data = ? WHERE id = ?';
+		$sql = 'UPDATE compra SET fornecedor_id = ?, descricao = ?, total = ?, qtde = ?, numero_nota_fiscal = ?, vencimento = ?, nome_representante = ?, data = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->setNumber($compra->fornecedorId);
 		$sqlQuery->set($compra->descricao);
 		$sqlQuery->set($compra->total);
 		$sqlQuery->setNumber($compra->qtde);
@@ -101,6 +103,13 @@ class CompraMySqlDAO implements CompraDAO{
 		$sql = 'DELETE FROM compra';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function queryByFornecedorId($value){
+		$sql = 'SELECT * FROM compra WHERE fornecedor_id LIKE ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDescricao($value){
@@ -152,6 +161,13 @@ class CompraMySqlDAO implements CompraDAO{
 		return $this->getList($sqlQuery);
 	}
 
+
+	public function deleteByFornecedorId($value){
+		$sql = 'DELETE FROM compra WHERE fornecedor_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
 
 	public function deleteByDescricao($value){
 		$sql = 'DELETE FROM compra WHERE descricao = ?';
@@ -213,6 +229,7 @@ class CompraMySqlDAO implements CompraDAO{
 		$compra = new Compra();
 		
 		$compra->id = $row['id'];
+		$compra->fornecedorId = $row['fornecedor_id'];
 		$compra->descricao = $row['descricao'];
 		$compra->total = $row['total'];
 		$compra->qtde = $row['qtde'];

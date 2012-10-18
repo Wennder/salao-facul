@@ -1,4 +1,4 @@
-<?php		
+<?php	
 	//include_once('verificar_logado.php');
 	require_once('include_dao.php');
 	
@@ -7,6 +7,11 @@
 	$isAdmin = $user != null && $user->admin;
 	
 ?>
+
+<script type="text/javascript">
+	isLogado = <?php echo ($user != null) ? "true;" : "false;"	 ?>
+	isAdmin = <?php echo ($isAdmin) ? "true;" : "false;"	 ?>
+</script>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
         "http://www.w3.org/TR/html4/frameset.dtd">
@@ -36,14 +41,9 @@
 
 <div id="nav">
 <ul class="nav nav-tabs nav-stacked">
-	<?php 
-	if ($user != null) {
-	?>
+
 	<li class="active"><a href="javascript:setConteudo('slots/agenda.php');">Agenda</a></li>
-	<?php 
-	}
-	?>
-	
+
 	<?php 
 	if ($isAdmin) {
 	?>

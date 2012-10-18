@@ -1,12 +1,11 @@
 <?php		
-	include_once('../verificar_logado.php');
 	require_once('../include_dao.php');
 	
 	$id = $_GET['id'];
 	$editando = $id != null;
 	
 	if ($editando) {
-		$cli = DAOFactory::getProdutoDAO()->load($id);
+		$cli = DAOFactory::getClienteDAO()->load($id);
 	}
 ?>
 

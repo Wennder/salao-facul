@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 interface ServicoDAO{
 
@@ -14,13 +14,13 @@ interface ServicoDAO{
 	 * @Return Servico 
 	 */
 	public function load($id);
+	
+	public function queryByAgendamento($agendamento_id);
 
 	/**
 	 * Get all records from table
 	 */
 	public function queryAll();
-	
-	public function queryByVenda($venda_id);
 	
 	/**
 	 * Get all records from table ordered by field

@@ -1,4 +1,8 @@
 var servicos;
+var navigator_value = 0;
+var isLogado;
+var isAdmin;
+var agendamento_color = "rgb(255, 0, 0)";
 
 $(document).ready(function(){
 	$("#nav").find("a").click(function(){
@@ -77,33 +81,38 @@ function setConteudo(pagina, slot) {
 }
 
 function criarAgenda(semana) {
+	$("#anterior").attr("disabled", semana <= 0);
+	
 	$.ajax({
         type: 'GET',
         url: "buscarAgenda.php?sem="+semana,
         success: function(json)
         {
-        	//var age = eval('(' + json + ')');
-        	
 	       	var agenda = $("#agenda");
 	       	agenda.empty();
 	       	var now = new Date();
-	       	var dia = now.getDate();
-	       	var count = dia + 6;
+	       	now.setDate(now.getDate() + (7 * semana));
+	       	var count = 6;
 	       	agenda.append("<table class=\"table table-bordered\"><thead><tr><th></th></tr></thead><tbody></tdoby>");
-	       	for (var i=dia; i<count; i++) {
-	       		var th = $("<th>" + dayToStr(now.getDay()) + " " + (dia++) + "/" + (now.getMonth()+1) + "</th>").appendTo(agenda.find("thead tr"));
-	       		$.data(th, "dia", now);
-	       		now.setDate(i+1);
+	       	for (var i=0; i<count; i++) {
 	       		if (now.getDay() == 0) {
-	       			now.setDate(i+2);
-	       			i++;
+	       			now.setDate(now.getDate()+1);
 	       			count++;
-	       			dia++;
+	       			continue;
 	       		}
+	       		
+	       		var th = $("<th>" + dayToStr(now.getDay()) + " " + (now.getDate()) + "/" + (now.getMonth()+1) + "</th>").appendTo(agenda.find("thead tr"));
+	       		$.data(th, "dia", now);
+	       		now.setDate(now.getDate()+1);
 	       	}
 	       	
 	       	for (var i=7; i<21; i++) {
-	       		agenda.find("tbody").append("<tr><td>"+ formatHora(i) +"</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+	       		var h1 = formatHora3(i);
+	       		agenda.find("tbody").append("<tr><td>"+ h1 +"</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+	       		if (i!=20) {
+	       			var h2 = h1.replace("00", "30");
+	       			agenda.find("tbody").append("<tr><td>"+ h2 +"</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+	       		}
 	       	}
 	       	
 	       	agenda.find("thead tr ::first-child").next().addClass("background-destacado");
@@ -112,19 +121,27 @@ function criarAgenda(semana) {
 	       	$("#agenda").find("td").popover({ 
 	    	    html : true,
 	    	    trigger: "manual",
+	    	    placement: "bottom",
 	    	    template: '<div class="popover agendamento"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
 	    	    content: function() {
-	    	    	var th = $(this).closest('table').find('th').eq($(this).index());
-	    	      	var index = $(th).index();
-	    		  	var dia = new Date();
-	    		  	var diff = (dia.getDate()+index-1)-dia.getDate();
-	    		  	var inc = (diff+dia.getDay()) > 6 ? 1 : 0 ;
-	    		  	dia.setDate(dia.getDate() + inc);
-	    		  	dia.setDate(dia.getDate() + diff);
-	    		  	var hora = $(this).parent().find(":first").text().split(":")[0];
-	    		  	dia.setHours(hora);
+	    	    	if (!isLogado) {
+	    	    		location.href = "login.php";
+	    	    		return;
+	    	    	}
+	    	    	
+	    	    	if (!isAdmin && ($(this).css("background-color") == agendamento_color)) {
+	    	    		noty({layout: 'center', type: 'warning', text: "Já existe um agendamento neste horário!"});
+	    	    		return;
+	    	    	}
+	    	    	
+	    	    	if (isAdmin && ($(this).css("background-color") != agendamento_color)) {
+	    	    		return;
+	    	    	}
+	    	    	
+	    	    	var dia = getDataFromTD(this);
 	    	     	return getFormAgendar(dia);
 	    	    }
+	       		
 	    	  });
 
 	    	$("#agenda").find("td").filter(function(){
@@ -132,14 +149,50 @@ function criarAgenda(semana) {
 	    		return $(th).index() > 0; 
 	    	}).click(function(){
 	    		$("#agenda").find("td").popover("hide");
-	    		$(this).popover("show");
+	    		var td = this;
+	    		setTimeout(function() {
+	    			if (isAdmin && ($(td).css("background-color") == agendamento_color)) {
+	    	    		var td1 = td;
+	    	    		while ($(td1).html() == "") {
+	    	    			var tr = $(td1).parent();
+	    	    			td1 = tr.prev().children().eq($(td1).index());
+	    	    		}
+	    	    		
+	    	    		var data = getDataFromTD(td1);
+	    	    		var dia = data.getFullYear() + "-" + (data.getMonth()+1) + "-" + data.getDate();
+	    	    		var hora = formatHora(data);
+	    	    		
+	    	    		$.ajax({
+	    	    			type: "GET",
+	    	    			url: "buscarAgendamento.php?dia="+dia+"&hora="+hora,
+	    	    		
+	    	    			success: function(json){
+	    	    				var ag = eval('(' + json + ')');
+	    	    				$(td).popover("show");
+	    	    				setTimeout(function() {
+	    	    					for (var i=0; i<ag.servicos.length; i++) {
+	    	    						 addServicoNoAgendamento(ag.servicos[i].descricao);
+	    	    					}
+	    	    				}, 300);
+	    	    			}
+	    	    		});
+	    	    		
+	    	    	}
+	    			else
+	    				$(td).popover("show");
+	    		}, 500);
+	    		
 	    	});
 
 	    	$("#agenda").find("td").filter(function(){
 	    		var th = $(this).closest('table').find('th').eq($(this).index());
 	    		return $(th).index() == 0; 
 	    	}).css("width", "20px");
-
+	    	
+	    	var age = eval('(' + json + ')');
+	    	for (var i=0; i<age.length; i++) {
+	    		marcarAgendamento(age[i]);
+	    	}
 
         },
         error:function(XMLHttpRequest, textStatus, errorThrown)
@@ -149,6 +202,54 @@ function criarAgenda(semana) {
         }
 	});
 
+}
+
+function getDataFromTD(td) {
+	var th = $(td).closest('table').find('th').eq($(td).index());
+  	var index = $(th).index();
+  	var dia = new Date();
+  	var diff = (dia.getDate()+index-1)-dia.getDate();
+  	var inc = (diff+dia.getDay()) > 6 ? 1 : 0 ;
+  	dia.setDate(dia.getDate() + inc);
+  	dia.setDate(dia.getDate() + diff);
+  	var split = $(td).parent().find(":first").text().split(":");
+  	var hora = split[0];
+  	var min = split[1];
+  	dia.setHours(hora);
+  	dia.setMinutes(min);
+  	dia.setDate(dia.getDate() + (7 * navigator_value));
+  	return dia;
+}
+
+function marcarAgendamento(agendamento) {
+	var split = agendamento.dia.split("-");
+	var ano = split[0];
+	var mes = split[1] - 1;
+	var dia = split[2];
+	
+	split = agendamento.inicio.split(":");
+	var hora = split[0];
+	var min = split[1];
+	
+	var data = new Date();
+	data.setFullYear(ano);
+	data.setMonth(mes);
+	data.setDate(dia);
+	data.setHours(hora);
+	data.setMinutes(min);
+	
+	var cr = getLinhaColuna(data);
+	var coluna = cr.split(",")[0];
+	var linha = cr.split(",")[1];
+	var linhas = parseInt(coluna) + (agendamento.duracao / 0.5);
+	
+	for (var j=coluna; j<linhas; j++) {
+		var td = $("#agenda tr:eq("+j+") td:eq("+linha+")");
+		td.css("background-color", agendamento_color);
+		if (j == coluna) {
+			td.html(agendamento.nomeCliente);
+		}
+	}
 }
 
 function dayToStr(day) {
@@ -203,7 +304,15 @@ function mesToStr(mes) {
 	}
 }
 
-function formatHora(hora){
+function formatHora(data){
+	var m = data.getMinutes();
+	m = m > 0 ? 30 : 0;
+	var hora = data.getHours();
+	var min = (m < 10 ? "0" + m : m);
+	return (hora < 10 ? "0" + hora + ":" + min : hora + ":" + min);
+}
+
+function formatHora3(hora){
 	return (hora < 10 ? "0" + hora + ":00" : hora + ":00");
 }
 
@@ -219,7 +328,7 @@ function formatData(data) {
 	var mes = mesToStr(data.getMonth());
 	dia = (dia < 10 ? "0" + dia : dia);
 //	var ano = data.getFullYear();
-	return dayToStr(data.getDay()) + ", " + dia + " de " + mes + ", " + formatHora(data.getHours()) ;
+	return dayToStr(data.getDay()) + ", " + dia + " de " + mes + ", " + formatHora(data) ;
 }
 
 function getFormAgendar(dia) {
@@ -230,12 +339,14 @@ function getFormAgendar(dia) {
 	select += "</select><button class=\"btn\" onclick=\"addServicoNoAgendamento();\">+</button></div>";
 	
 	var data = dia.getFullYear() + "-" + (dia.getMonth()+1) + "-" + dia.getDate();
-	var horario = formatHora(dia.getHours());
+	var horario = formatHora(dia);
 	
 	var html = 
 				"<div id=\"agendamento\">" +
-					"<form onsubmit=\"return false;\">" +
-						"<table><tr><td>" +
+					"<form onsubmit=\"return false;\"><table style=\"width: 100%;\">";
+	if (!isAdmin) {
+		html +=
+						"<tr><td>" +
 						"<label>Horário</label>" +
 						"<div class=\"input-append\">" +
 						"<input type=\"text\" value=\"" + formatData(dia) + "\" style=\"width: 240px;\" readonly=\"readonly\"/>" +
@@ -243,20 +354,28 @@ function getFormAgendar(dia) {
 						"</td><td>" + 
 						"<label>O que deseja fazer?</label>" +
 						select +
-						"</td></tr><tr><td colspan=\"2\">" +
-						"<div id=\"servicos_escolhidos\"><table class=\"table\"></table></div>" +
+						"</td></tr>";
+	}
+	
+	html += 			"<tr><td colspan=\"2\">" +
+						"<div id=\"servicos_escolhidos\"><table class=\"table\" >" +
+						"</table></div>" +
 						"</td></tr></table>" +
-						"<div>" +
-						"<button style=\"float: right;\" class=\"btn\" onclick=\"fecharPopovers();\">Cancelar</button>" +
-						"<button style=\"float: right;\" class=\"btn btn-primary\" onclick=\"agendar('" + data + "', '"+ horario +"')\">Agendar</button>" +
-						"</div>" +
+						"<div>";
+	if (!isAdmin) {
+		html += "<button style=\"float: right;\" class=\"btn\" onclick=\"fecharPopovers();\">Cancelar</button>" +
+				"<button style=\"float: right;\" class=\"btn btn-primary\" onclick=\"agendar('" + data + "', '"+ horario +"')\">Agendar</button>";
+	}
+	
+	html +=			"</div>" +
 					"</form>" +
 				"</div>";
 	return html;
 }
 
-function addServicoNoAgendamento() {
-	var serv = $("#servico").val();
+function addServicoNoAgendamento(serv) {
+	if (serv == null)
+		serv = $("#servico").val();
 	var table = $("#servicos_escolhidos").find("table");
 	var spans = table.find("span");
 	var jaTem = false;
@@ -268,7 +387,14 @@ function addServicoNoAgendamento() {
 	}
 	
 	if (!jaTem) {
-		table.append("<tr><td><span>" + serv + "</span></td><td><a class=\"btn\">x</a></td></tr>");
+		var html = "<tr><td style=\"width: 90%;\"><span>" + serv + "</span></td>";
+		if (!isAdmin) {
+			html += "<td><a class=\"btn\">x</a></td>";
+		}
+		
+		html += "</tr>";
+		
+		table.append(html);
 		table.find("a").click(function() {
 			table.remove($(this).parent().parent().remove());
 		});
@@ -293,7 +419,9 @@ function agendar(data, horario) {
         	fecharPopovers();
         	var status = eval('(' + data + ')');
 			   if (status.tipo == 'ok') {
-				   noty({layout: 'center', type: 'success', text: status.info});
+				   noty({layout: 'center', type: 'success', text: 'Agendado!'});
+				   var g = eval('(' + status.info + ')');
+				   marcarAgendamento(g);
 			   }
 			   else {
 				   noty({layout: 'center', type: 'error', text: status.info});
@@ -311,5 +439,103 @@ function agendar(data, horario) {
 function fecharPopovers() {
 	 $("#agenda").find("td").popover("hide");
 }
+
+function getLinhaColuna(data) {	
+	var col = -1;
+	switch (data.getHours()) {
+	case 7:
+		col =  data.getMinutes() == 0 ? 1 : 2;
+		break;
+	case 8:
+		col =  data.getMinutes() == 0 ? 3 : 4;
+		break;
+	case 9:
+		col =  data.getMinutes() == 0 ? 5 : 6;
+		break;
+	case 10:
+		col =  data.getMinutes() == 0 ? 7 : 8;
+		break;
+	case 11:
+		col =  data.getMinutes() == 0 ? 9 : 10;
+		break;
+	case 12:
+		col =  data.getMinutes() == 0 ? 11 : 12;
+		break;
+	case 13:
+		col =  data.getMinutes() == 0 ? 13 : 14;
+		break;
+	case 14:
+		col =  data.getMinutes() == 0 ? 15 : 16;
+		break;
+	case 15:
+		col =  data.getMinutes() == 0 ? 17 : 18;
+		break;
+	case 16:
+		col =  data.getMinutes() == 0 ? 19 : 20;
+		break;
+	case 17:
+		col =  data.getMinutes() == 0 ? 21 : 22;
+		break;
+	case 18:
+		col =  data.getMinutes() == 0 ? 23 : 24;
+		break;
+	case 19:
+		col =  data.getMinutes() == 0 ? 25 : 26;
+		break;
+	case 20:
+		col =  data.getMinutes() == 0 ? 27 : 28;
+		break;
+	default:
+		break;
+	}
+	
+	var hoje = new Date();
+	hoje.setDate(hoje.getDate()+navigator_value*7);
+	if (hoje.getDay() == 0)
+		hoje.setDay(hoje.getDay() + 1);
+	
+	var row = 0;
+	if (data.getDay() == hoje.getDay())
+		row = 1;
+	else {
+		hoje.setDate(hoje.getDate()+1);
+		if (hoje.getDay() == 0)
+			hoje.setDate(hoje.getDate() + 1);
+		if (data.getDay() == hoje.getDay())
+			row = 2;
+		else {
+			hoje.setDate(hoje.getDate()+1);
+			if (hoje.getDay() == 0)
+				hoje.setDate(hoje.getDate() + 1);
+			if (data.getDay() == hoje.getDay())
+				row = 3;
+			else {
+				hoje.setDate(hoje.getDate()+1);
+				if (hoje.getDay() == 0)
+					hoje.setDate(hoje.getDate() + 1);
+				if (data.getDay() == hoje.getDay())
+					row = 4;
+				else {
+					hoje.setDate(hoje.getDate()+1);
+					if (hoje.getDay() == 0)
+						hoje.setDate(hoje.getDate() + 1);
+					if (data.getDay() == hoje.getDay())
+						row = 5;
+					else {
+						hoje.setDate(hoje.getDate()+1);
+						if (hoje.getDay() == 0)
+							hoje.setDate(hoje.getDate() + 1);
+						if (data.getDay() == hoje.getDay())
+							row = 6;
+					}
+				}
+			}
+		}
+	}
+	
+	
+	return col + "," + row;
+}
+
 
 

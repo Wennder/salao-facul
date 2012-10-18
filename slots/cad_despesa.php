@@ -1,5 +1,4 @@
 <?php		
-	include_once('../verificar_logado.php');
 	require_once('../include_dao.php');
 ?>
 

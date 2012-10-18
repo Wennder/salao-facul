@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS fornecedor (
 
 CREATE TABLE IF NOT EXISTS compra (
   id int(11) NOT NULL AUTO_INCREMENT,
+  fornecedor_id int NOT NULL references fornecedor(id),
   descricao text NOT NULL,
   total double,
   qtde int,
@@ -68,6 +69,7 @@ CREATE TABLE IF NOT EXISTS venda (
 	id int(11) primary key NOT NULL AUTO_INCREMENT,
 	cliente_id int  not null references cliente(id),
 	data datetime not null,
+	data_vencimento datetime not null,
 	total double,
 	total_pago double,
   	obs text NOT NULL
@@ -102,7 +104,7 @@ CREATE TABLE IF NOT EXISTS utensilio (
 CREATE TABLE servico (
 	id int primary key not null auto_increment,
 	descricao varchar(80) not null,
-	horas int not null,
+	horas float not null,
 	valor double
 );
 
@@ -128,7 +130,7 @@ CREATE TABLE agendamento (
 	cliente_id int  not null references cliente(id),
 	dia date not null,
 	inicio varchar(20) not null,
-	duracao int
+	duracao float
 );
 
 CREATE TABLE agendamento_servico (

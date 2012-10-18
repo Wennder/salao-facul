@@ -1,5 +1,4 @@
 <?php		
-	require_once('../verificar_logado.php');
 	require_once('../include_dao.php');
 	
 	session_start();
@@ -15,6 +14,10 @@
 </head>
 <body>
 	<h4>Agenda</h4>
+	<div id="navigator" style="float: right;">
+	<button id="anterior" class="btn">Anterior</button>
+	<button id="proximo" class="btn">Próximo</button>
+	</div>
 	<div id="agenda">
 		<table class="table">
 		</table>
@@ -25,6 +28,15 @@
 		echo "servicos = eval('(' + '$servs_json' + ')');"; 
 	?>;
 	criarAgenda(0);
+
+	$("#anterior").click(function() {
+		criarAgenda(--navigator_value);
+	});
+
+	$("#proximo").click(function() {
+		criarAgenda(++navigator_value);
+	});
+	
     
 </script>
 </body>

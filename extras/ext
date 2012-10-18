@@ -6,11 +6,26 @@
 		return $this->getList($sqlQuery);
 	}
 	
+	public function queryByDiaHora($dia, $hora){
+		$sql = 'SELECT * FROM agendamento WHERE dia = ? and inicio = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($dia);
+		$sqlQuery->set($hora);
+		return $this->getRow($sqlQuery);
+	}
 	
 	venda
 	
 	public function queryByParam($param){
 		$sql = "SELECT v.* FROM venda v, cliente c WHERE v.cliente_id = c.id AND (c.nome LIKE '%$param%' OR c.username LIKE '%$param%') ORDER BY c.nome";
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
+	
+	servico
+	
+	public function queryByAgendamento($agendamento_id){
+		$sql = "SELECT s.* FROM servico s, agendamento_servico as WHERE s.id = as.id_servico AND as.id_agendamento=$agendamento_id ORDER BY $orderColumn";
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -47,4 +62,13 @@
 		$sqlQuery->setNumber($vendaId);
 	
 		return $this->executeUpdate($sqlQuery);
+	}
+	
+	agendamento servico
+	
+	public function queryByAgendamento($id_agendamento){
+		$sql = 'SELECT * FROM agendamento_servico WHERE id_agendamento = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($id_agendamento);
+		return $this->getList($sqlQuery);
 	}

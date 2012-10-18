@@ -3,7 +3,7 @@
  * Class that operate on table 'agendamento'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2012-10-12 17:12
+ * @date: 2012-10-13 19:48
  */
 class AgendamentoMySqlDAO implements AgendamentoDAO{
 
@@ -25,6 +25,12 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 	 */
 	public function queryAll(){
 		$sql = 'SELECT * FROM agendamento';
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+	}
+	
+	public function queryBetweenDatas($ini, $fim) {
+		$sql = "SELECT * FROM agendamento WHERE dia between '$ini' and '$fim'";
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -63,7 +69,7 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 		$sqlQuery->setNumber($agendamento->clienteId);
 		$sqlQuery->set($agendamento->dia);
 		$sqlQuery->set($agendamento->inicio);
-		$sqlQuery->setNumber($agendamento->duracao);
+		$sqlQuery->set($agendamento->duracao);
 
 		$id = $this->executeInsert($sqlQuery);	
 		$agendamento->id = $id;
@@ -82,7 +88,7 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 		$sqlQuery->setNumber($agendamento->clienteId);
 		$sqlQuery->set($agendamento->dia);
 		$sqlQuery->set($agendamento->inicio);
-		$sqlQuery->setNumber($agendamento->duracao);
+		$sqlQuery->set($agendamento->duracao);
 
 		$sqlQuery->setNumber($agendamento->id);
 		return $this->executeUpdate($sqlQuery);
@@ -110,6 +116,15 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
+	
+	public function queryByDiaHora($dia, $hora){
+		$sql = 'SELECT * FROM agendamento WHERE dia = ? and inicio = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($dia);
+		$sqlQuery->set($hora);
+		return $this->getRow($sqlQuery);
+	}
+	
 
 	public function queryByInicio($value){
 		$sql = 'SELECT * FROM agendamento WHERE inicio LIKE ?';
@@ -121,7 +136,7 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 	public function queryByDuracao($value){
 		$sql = 'SELECT * FROM agendamento WHERE duracao LIKE ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
+		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
@@ -150,7 +165,7 @@ class AgendamentoMySqlDAO implements AgendamentoDAO{
 	public function deleteByDuracao($value){
 		$sql = 'DELETE FROM agendamento WHERE duracao = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
+		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
